@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ViewAnniversaryReservations;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('anniversary')
+    ->name('anniversary.')
+    ->group(function () {
+        Route::view('/import-data', 'anniversary.import-data')
+            ->name('import-data-view');
+        Route::post('/import-data', ViewAnniversaryReservations::class)
+            ->name('import-data');
+    });
