@@ -1,6 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
+    "version": "0.1.0",
     "description": "cabri automations",
     "keywords": ["laravel", "framework"],
     "license": "BSD-2-Clause",
