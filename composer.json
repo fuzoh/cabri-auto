@@ -1,9 +1,9 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "cabri automations",
     "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "license": "BSD-2-Clause",
     "require": {
         "php": "^8.3",
         "guzzlehttp/guzzle": "^7.2",
