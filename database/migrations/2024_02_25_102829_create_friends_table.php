@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parent_participant_at_camps', function (Blueprint $table) {
+        Schema::create('friends', function (Blueprint $table) {
             $table->id();
-            $table->boolean('get_participant');
-            $table->boolean('get_in_car');
-            $table->boolean('get_other_participant');
-            $table->string('names_visited')->nullable();
-            $table->string('names_picked_up')->nullable();
             $table->foreignId('registration_id')->constrained();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('parent_participant_at_camps');
+        Schema::dropIfExists('friends');
     }
 };

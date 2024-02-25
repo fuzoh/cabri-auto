@@ -10,7 +10,8 @@ class ParentParticipantAtCamp extends Model
         'get_participant',
         'get_in_car',
         'get_other_participant',
-        'names',
+        'names_visited',
+        'names_picked_up',
     ];
 
     public $casts = [

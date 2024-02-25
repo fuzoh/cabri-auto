@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ParentMembers extends Model
+class ParentMember extends Model
 {
     public $fillable = [
         'group',

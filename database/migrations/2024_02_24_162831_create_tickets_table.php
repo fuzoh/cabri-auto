@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['adult', 'child']);
-            $table->enum('location', ['Bienne', 'Lausanne', 'Neuchatel', 'Yverdon', 'Vevey']);
+            $table->enum('location', ['Bienne', 'Lausanne', 'Neuchatel', 'Yverdon', 'Vevey'])->nullable();
+            $table->foreignId('registration_id')->constrained();
         });
     }
 

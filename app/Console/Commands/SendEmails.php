@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\AnniversaryJourneyConfirmation;
+use App\Models\Registration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use Rap2hpoutre\FastExcel\FastExcel;
 
 class SendEmails extends Command
 {
@@ -27,10 +28,15 @@ class SendEmails extends Command
      */
     public function handle()
     {
-        $collection = (new FastExcel)->import('inscription.xlsx');
-        dd($collection);
-        $collection->each(function ($row) {
-            echo $row['Adresse e-mail'];
+        $registrations = Registration::whereNull('payment_email_sent')->get();
+
+        $registrations->each(function ($r) {
+            try {
+                Mail::to($r->email)->send(new AnniversaryJourneyConfirmation($r));
+                $r->update(['payment_email_sent' => now()]);
+            } catch (\Exception $e) {
+                $this->error("Error sending email to {$r->email}");
+            }
         });
     }
 }

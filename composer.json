@@ -17,6 +17,7 @@
         "rap2hpoutre/fast-excel": "^5.3"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.15",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.14",
         "laravel/sail": "^1.18",
