@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\AnniversaryInscription;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class SendEmails extends Command
 {
@@ -27,6 +27,10 @@ class SendEmails extends Command
      */
     public function handle()
     {
-        Mail::to('ludovic.richard@flambeaux.ch')->send(new AnniversaryInscription());
+        $collection = (new FastExcel)->import('inscription.xlsx');
+        dd($collection);
+        $collection->each(function ($row) {
+            echo $row['Adresse e-mail'];
+        });
     }
 }
