@@ -3,10 +3,16 @@
 
 Bonjour {{ $registration->first_name }} {{ $registration->last_name }},
 
-Nous avons bien reçu votre inscription à la journée anniversaire du camp de brigade.
+Nous avons bien reçu les informations
 
-    Vous trouvez ci dessous un récapitulatif des informations que vous avez renseignées dans le formulaire d'inscription, ainsi que les
-    informations pour le paiement du camp. Pour rappel, votre inscription ne sera validée qu'à réception du paiement.
+## Récapitulatif de l'inscription
 
-Merci
+Preneur : {{ $registration->first_name }} {{ $registration->last_name }}
+Email : {{ $registration->email }}
+Téléphone : {{ $registration->phone }}
+@if($registration->participantRecuperation)
+    Vous avez indiqué que vous ne participerez pas à la journée, mais viendrez récupérer les participants suivants :
+    {{ $registration->participantRecuperation->names }}
+@endif
+
 </x-mail::message>

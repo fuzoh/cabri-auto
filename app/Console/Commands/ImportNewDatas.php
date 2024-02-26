@@ -64,7 +64,8 @@ class ImportNewDatas extends Command
                     'names_picked_up' => $row['Indiquez les noms, prénoms et groupe de tous les enfants que vous allez récupérer. Mettez à la ligne pour chaque personne supplémentaire :2'],
                     'names_visited' => $row['Indiquez les noms, prénoms et groupe de vos enfants, que vous venez visiter :'],
                 ]);
-                if (! $r->parentParticipantAtCamp->get_in_car) {
+                dump($r->parentParticipantAtCamp->get_participant);
+                if (! $r->parentParticipantAtCamp->get_in_car && $r->parentParticipantAtCamp->get_participant) {
                     $location = Location::fromCity($row["Lieux de départ et d'arrivée en train"]);
                 }
             }
