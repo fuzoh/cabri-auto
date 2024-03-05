@@ -1,7 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "cabri automations",
     "keywords": [
         "laravel",

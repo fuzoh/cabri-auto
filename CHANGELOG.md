@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.2](https://github.com/fuzoh/cabri-auto/compare/v0.1.1...v0.1.2) (2024-02-26)
+
+
+### Features
+
+* **data-import:** Add database structure for from importation ([facc602](https://github.com/fuzoh/cabri-auto/commit/facc602913f502408fe70c1a64c21fc6d30cb35a))
+* **data-import:** add routes for data import ([27cfa24](https://github.com/fuzoh/cabri-auto/commit/27cfa24cc0743c11e00143ed8612487103766bfe))
+* **email:** add email for participant recuperation ([c49d0f7](https://github.com/fuzoh/cabri-auto/commit/c49d0f7d089b18925639a10d1813e7c3343ee2fc))
+* **email:** add simple email sending command ([69791dc](https://github.com/fuzoh/cabri-auto/commit/69791dca43ecf854dfba0db16237a7a6683d719e))
+* **email:** Simple mailer ([897615a](https://github.com/fuzoh/cabri-auto/commit/897615ae6f09355ece655549ec7f787e3d11ee0d))
+
+
+### Miscellaneous Chores
+
+* add data file to ignored files ([cbdfa49](https://github.com/fuzoh/cabri-auto/commit/cbdfa496595443fd05fe1773c2caec4d87dbcb38))
+* initial tailwindcss configuration ([20b2a98](https://github.com/fuzoh/cabri-auto/commit/20b2a983866ea6dc875684cebcb2c98ec08b6815))
+
 ## 0.1.1 (2024-02-21)
 
 
