@@ -15,6 +15,7 @@ class Registration extends Model
         'phone',
         'comment',
         'form_filled_at',
+        'payment_email_sent',
     ];
 
     public $casts = [
@@ -29,28 +30,8 @@ class Registration extends Model
         return $this->hasOne(Ticket::class);
     }
 
-    public function elder(): HasOne
-    {
-        return $this->hasOne(Elder::class);
-    }
-
-    public function parentMember(): HasOne
-    {
-        return $this->hasOne(ParentMember::class);
-    }
-
-    public function parentParticipantAtCamp(): HasOne
-    {
-        return $this->hasOne(ParentParticipantAtCamp::class);
-    }
-
     public function participantRecuperation(): HasOne
     {
         return $this->hasOne(ParticipantRecuperation::class);
-    }
-
-    public function friend(): HasOne
-    {
-        return $this->hasOne(Friend::class);
     }
 }

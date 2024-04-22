@@ -8,7 +8,10 @@ enum Location: string
     case Lausanne = 'Lausanne';
     case Neuchatel = 'Neuchatel';
     case Yverdon = 'Yverdon';
-    case Vevey = 'Vevey';
+    case Montreux = 'Montreux';
+    case Nyon = 'Nyon';
+    case Morges = 'Morges';
+    case Bulle = 'Bulle';
 
     public static function fromCity(string $city): Location
     {
@@ -17,7 +20,10 @@ enum Location: string
             'Lausanne' => self::Lausanne,
             'Neuchâtel' => self::Neuchatel,
             'Yverdon' => self::Yverdon,
-            'Vevey' => self::Vevey,
+            'Montreux' => self::Montreux,
+            'Nyon' => self::Nyon,
+            'Morges' => self::Morges,
+            'Bulle' => self::Bulle,
         };
     }
 }

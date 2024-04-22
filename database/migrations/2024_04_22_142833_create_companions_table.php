@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('companions', function (Blueprint $table) {
             $table->id();
-            $table->integer('how_many_adults');
-            $table->integer('how_many_children');
-            $table->string('names');
+            $table->integer('baby_companion_count')->default(0);
+            $table->integer('adult_companion_count')->default(0);
             $table->foreignId('ticket_id')->constrained();
         });
     }
