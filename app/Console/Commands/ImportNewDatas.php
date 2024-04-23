@@ -37,10 +37,16 @@ class ImportNewDatas extends Command
                 'first_name' => $row['Prénom'],
                 'last_name' => $row['Nom'],
                 'email' => $row['Adresse e-mail'],
-                'phone' => $row['Numéro de téléphone mobile (atteingnable le jour même)'],
+                'phone' => $row['Numéro de téléphone mobile (atteignable le jour même)'],
                 'comment' => $row['Informations supplémentaires, commentaires, remarques :'],
                 'form_filled_at' => $row['Completion time'],
             ]);
+
+
+
+
+
+            // Old script
             if ($row['Je participe à la journée en tant que :'] === 'Je ne participe pas à la journée, mais vient récupérer des participants') {
                 $r->participantRecuperation()->create([
                     'names' => $row['Indiquez les noms, prénoms et groupe de tous les enfants que vous allez récupérer. Mettez à la ligne pour chaque personne supplémentaire :'],

@@ -13,7 +13,7 @@ enum Location: string
     case Morges = 'Morges';
     case Bulle = 'Bulle';
 
-    public static function fromCity(string $city): Location
+    public static function fromCityString(string $city): Location
     {
         return match ($city) {
             'Bienne' => self::Bienne,

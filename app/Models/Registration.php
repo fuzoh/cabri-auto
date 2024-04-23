@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Enums\RegistrationType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -21,6 +22,7 @@ class Registration extends Model
     public $casts = [
         'form_filled_at' => 'datetime',
         'payment_email_sent' => 'datetime',
+        'type' => RegistrationType::class,
     ];
 
     public $timestamps = false;
