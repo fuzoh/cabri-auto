@@ -11,6 +11,8 @@ Nous vous confirmons avoir reçu les informations pour le retour de vos particip
 Vous avez indiqué dans le formulaire que vous ne **participerez pas à la journée anniversaire**, mais **viendrez uniquement récupérer
 vos participants à la fin de la journée** du **20 juillet 2024**.
 
+---
+
 Voici un récapitulatif des informations que vous avez indiqué:
 
 **Nom, Prénom** : {{ $registration->first_name }} {{ $registration->last_name }}

@@ -41,7 +41,7 @@ class SendInscriptionConfirmationEmail extends Command
                     Mail::to($registration->email)->send(new PartRecuperationConfirmation($registration));
                 } else {
                     echo "Inscription";
-                    dump($registration->ticket->transport_type);
+                    //dump($registration->ticket->transport_type);
                     Mail::to($registration->email)->send(new RegistrationConfirmation($registration));
                 }
 
