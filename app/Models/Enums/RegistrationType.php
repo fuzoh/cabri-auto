@@ -14,8 +14,7 @@ enum RegistrationType: string
         return match ($type) {
             'Connaissances, amis de la Brigade' => self::Friend,
             'Parent direct de participants/responsables du camp' => self::Parent,
-            'Famille de participants/responsables du camp' => self::Family,
-            'Amis scouts' => self::ScoutFriend,
+            'Famille de participants/responsables du camp' => self::Family
         };
     }
 }

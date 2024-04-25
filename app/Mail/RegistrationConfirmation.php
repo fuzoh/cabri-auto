@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class nniversaryJourneyConfirmation extends Mailable
+class RegistrationConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +27,7 @@ class nniversaryJourneyConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Anniversary Journey Confirmation',
+            subject: 'Registration Confirmation',
         );
     }
 
@@ -37,7 +37,7 @@ class nniversaryJourneyConfirmation extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'mail.registration.initial_confirmation',
         );
     }
 
