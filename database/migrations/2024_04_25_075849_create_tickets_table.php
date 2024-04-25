@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->enum('transport_type', ['special_train', 'car', 'autonomous']);
+            $table->enum('transport_type', ['special_train', 'car', 'autonomous', 'local_resident']);
             $table->enum('transport_location', ['Bienne', 'Lausanne', 'Neuchatel', 'Yverdon', 'Montreux', 'Nyon', 'Bulle', 'Morges'])->nullable();
             $table->string('location_autonomous')->nullable();
             $table->integer('baby_count')->default(0)->nullable();

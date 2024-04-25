@@ -2,8 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\PartRecuperationConfirmation;
+use App\Mail\RegistrationConfirmation;
 use App\Models\Registration;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SendInscriptionConfirmationEmail extends Command
 {
@@ -27,11 +30,29 @@ class SendInscriptionConfirmationEmail extends Command
     public function handle()
     {
         // Final all registration that did not receive a confirmation email
-        $registrations = Registration::where('payment_email_sent', null)->get();
-
+        $registrations = Registration::whereNull('payment_email_sent')->get();
 
         // Send the confirmation email
+        $registrations->each(function (Registration $registration) {
+            // Send the email
+            try {
+                if ($registration->participantRecuperation && !$registration->ticket) {
+                    echo "Part recuperation";
+                    Mail::to($registration->email)->send(new PartRecuperationConfirmation($registration));
+                } else {
+                    echo "Inscription";
+                    dump($registration->ticket->transport_type);
+                    Mail::to($registration->email)->send(new RegistrationConfirmation($registration));
+                }
 
-        // Add the send timestamp to the registration
+                // Mark the registration as having received the email
+                //$registration->payment_email_sent = now();
+                //$registration->save();
+            } catch (\Exception $e) {
+                dump($registration);
+                dd($e);
+            }
+
+        });
     }
 }

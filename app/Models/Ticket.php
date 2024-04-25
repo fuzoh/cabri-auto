@@ -11,6 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ticket extends Model
 {
+
+    const JOURNEY_PRICE = 5;
+    const TRANSPORT_PRICE = 20;
+
+
     public $fillable = [
         'transport_type',
         'transport_location',
@@ -30,5 +35,20 @@ class Ticket extends Model
     public function registration(): BelongsTo
     {
         return $this->belongsTo(Registration::class);
+    }
+
+    public function totalTransportPrice(): int
+    {
+        return (1 + $this->adult_count) * self::TRANSPORT_PRICE;
+    }
+
+    public function totalJourneyPrice(): int
+    {
+        return (1 + $this->adult_count) * self::JOURNEY_PRICE;
+    }
+
+    public function totalPrice(): int
+    {
+        return $this->totalTransportPrice() + $this->totalJourneyPrice();
     }
 }

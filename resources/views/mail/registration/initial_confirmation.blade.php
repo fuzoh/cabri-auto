@@ -1,12 +1,104 @@
 <x-mail::message>
-# Introduction
 
-The body of your message.
+*Ceci est un email automatique, merci de ne pas répondre*
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+# Confirmation de votre inscription à la journée anniversaire des 60 ans de la Brigade Romande des Flambeaux de l'évangile
 
-Thanks,<br>
-{{ config('app.name') }}
+
+Bonjour,
+
+Nous vous confirmons avoir reçu votre inscription à la journée anniversaire de notre camp de brigade. Vous trouvez ci dessous un récapitulatif
+des informations que vous avez indiquées aisi que les informations pour le paiement.
+
+Merci de nous écrire en cas d'erreur. La récéption du paiement confirmera votre inscription.
+
+
+## Informations du preneur :
+
+**Nom, Prénom** : {{ $registration->first_name }} {{ $registration->last_name }}
+
+**Email** : {{ $registration->email }}
+
+**Téléphone** : {{ $registration->phone }}
+
+
+@if($registration->ticket->baby_count + $registration->ticket->adult_count > 0)
+##Vous avez indiqué être accompagné de :
+
+{{ $registration->ticket->baby_count }} personnes de moins de 6 ans.
+
+{{ $registration->ticket->adult_count }} personnes de plus de 6 ans.
+
+Noms de vous accompagnants :
+
+{{ $registration->ticket->companion_names }}
+@else
+##Vous avez indiqué venir seul a la journée.
+@endif
+
+
+@if($registration->participantRecuperation)
+##Vous avez indiqué que vous repartirez avec les participnats suivant à la fin de la journée :
+
+{{ $registration->participantRecuperation->names }}
+
+Nous rappelons qu'il sont sous votre responsabilité pour le trajet du retour.
+@else
+##Vous avez indiqué que vous ne reparez avec aucun participant après la journée
+@endif
+
+
+@if($registration->ticket->transport_type === \App\Models\Enums\TransportType::Car)
+##Vous avez indiqué que vous viendrez en voiture.
+
+Les frais d'inscription sont donc de CHF 5.- par participant de plus de 6 ans.
+Vous avez indiqué {{ $registration->ticket->adult_count }} adultes. Plus vous, le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
+
+@elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::SpecialTrain)
+##Vous vous déplacerez au moyen des trains spéciaux organisés par le camp.
+
+Vous partirez depuis la gare de : **{{ $registration->ticket->transport_location }}**.
+Les informations quant aux horaires de départ vous seront communiquées ultérieurement.
+
+Vous avez indiqué {{ $registration->ticket->adult_count }} participant de plus de 6 ans.
+Le tarif pour les personnes de plus de 6 ans est de 5.- pour la journée et 20.- pour le transport.
+Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalPrice() }}.- CHF**.
+
+@elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::Autonomous)
+##Vous avez indiqué que vous et vos accompagnants avez un AG et viendred de manière autonome.
+Vous partirez depuis : {{ $registration->ticket->location_autonomous }}
+
+Les frais d'inscription sont donc de CHF 5.- par participant de plus de 6 ans.
+Vous avez indiqué {{ $registration->ticket->adult_count }} adultes.
+Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
+
+@elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::LocalResident)
+##Vous avez indiqué que vous habitez dans la région et viendrez de facon autonome.
+Veuillez noter qu'il n'y aura pas de places de parc disponibles sur la comunne de Rossignère.
+
+Les frais d'inscription sont de CHF 5.- par participant de plus de 6 ans.
+Vous avez indiqué {{ $registration->ticket->adult_count }} personnes de plus de 6 ans.
+Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
+@endif
+
+## Coordonnées pour le paiement :
+IBAN : CH53 8080 8005 8147 5591 2
+Nom : Le camp de brigade 2024
+Lieux : Chemin de la Maraîche 10, 1802 Corseaux
+
+Vous pouvez aussi utiliser la QR facture en pièce jointe.
+
+Pour rappel, la récéption du paiement valide définitivement votre inscription.
+
+
+Nous vous remercions pour votre inscription et nous réjouissons de vous voir lors du camp,
+
+
+Dans l'intervalle, nos meilleures salutations,
+
+La maîtrise de coordination du camp de brigade.
+
+
+
+*En cas de questions [coordination@cabri24.ch](mailto:coordination@cabri24.ch)*
 </x-mail::message>

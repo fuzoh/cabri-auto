@@ -7,4 +7,5 @@ enum TransportType: string
     case SpecialTrain = 'special_train';
     case Car = 'car';
     case Autonomous = 'autonomous';
+    case LocalResident = 'local_resident';
 }

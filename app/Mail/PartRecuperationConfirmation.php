@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RegistrationConfirmation extends Mailable
+class PartRecuperationConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,8 +19,7 @@ class RegistrationConfirmation extends Mailable
      */
     public function __construct(
         public Registration $registration,
-    )
-    {
+    ) {
         //
     }
 
@@ -30,7 +29,7 @@ class RegistrationConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Information pour le paiement - Journée anniversaire, 60 ans de la brigade des flambeaux de l'évangile",
+            subject: 'Confirmation - récupération de vos enfants lors de la journée anniversaire du camp de brigade',
         );
     }
 
@@ -40,7 +39,7 @@ class RegistrationConfirmation extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.registration.initial_confirmation',
+            markdown: 'mail.registration.part_recuperation_confirmation',
         );
     }
 

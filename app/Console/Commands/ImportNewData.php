@@ -71,10 +71,14 @@ class ImportNewData extends Command
                                     $ticket->transport_type = TransportType::Autonomous;
                                     $ticket->location_autonomous = $row["Indiquez votre ville de départ"];
                                 } elseif ($row["Je "] === "Souhaite venir en train via les trains spéciaux organisés.") {
-                                    $ticket->transport_type = TransportType::SpecialTrain;
-                                    $ticket->transport_location = Location::fromCityString(
-                                        $row["Lieu de départ et d'arrivée en train"]
-                                    );
+                                    if($row["Lieu de départ et d'arrivée en train"] === "J'habite dans la région du camp (Rossinière, Château d'Oex, Rougemont et plus haut) et viens à pied ou via les horaires standards de train") {
+                                        $ticket->transport_type = TransportType::LocalResident;
+                                    } else {
+                                        $ticket->transport_type = TransportType::SpecialTrain;
+                                        $ticket->transport_location = Location::fromCityString(
+                                            $row["Lieu de départ et d'arrivée en train"]
+                                        );
+                                    }
                                 } else {
                                     throw new \Exception("Unknown transport type for Je");
                                 }
@@ -89,10 +93,14 @@ class ImportNewData extends Command
                                 if ($row["Est-ce que vous souhaitez récupérer ces personnes en voiture ? (le prix du parking est de CHF 10.- par voiture)"] === "OUI, en voiture") {
                                     $ticket->transport_type = TransportType::Car;
                                 } elseif ($row["Est-ce que vous souhaitez récupérer ces personnes en voiture ? (le prix du parking est de CHF 10.- par voiture)"] === "NON, j'utiliserai les trains organisés") {
-                                    $ticket->transport_type = TransportType::SpecialTrain;
-                                    $ticket->transport_location = Location::fromCityString(
-                                        $row["Lieu de départ et d'arrivée en train"]
-                                    );
+                                    if($row["Lieu de départ et d'arrivée en train"] === "J'habite dans la région du camp (Rossinière, Château d'Oex, Rougemont et plus haut) et viens à pied ou via les horaires standards de train") {
+                                        $ticket->transport_type = TransportType::LocalResident;
+                                    } else {
+                                        $ticket->transport_type = TransportType::SpecialTrain;
+                                        $ticket->transport_location = Location::fromCityString(
+                                            $row["Lieu de départ et d'arrivée en train"]
+                                        );
+                                    }
                                 } else {
                                     throw new \Exception("Unknown transport type for participant recuperation");
                                 }
