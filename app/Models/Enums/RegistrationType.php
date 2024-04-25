@@ -12,7 +12,7 @@ enum RegistrationType: string
     public static function fromFromString(string $type): RegistrationType
     {
         return match ($type) {
-            'Connaisances, amis de la brigade' => self::Friend,
+            'Connaissances, amis de la Brigade' => self::Friend,
             'Parent direct de participants/responsables du camp' => self::Parent,
             'Famille de participants/responsables du camp' => self::Family,
             'Amis scouts' => self::ScoutFriend,
