@@ -2,11 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\AnniversaryJourneyConfirmation;
-use App\Mail\ParticipantRecuperation;
-use App\Models\Registration;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
 
 class SendEmails extends Command
 {
@@ -22,26 +18,13 @@ class SendEmails extends Command
      *
      * @var string
      */
-    protected $description = 'Email send test';
+    protected $description = 'Command description';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $registrations = Registration::whereNull('payment_email_sent')->get();
-
-        $registrations->each(function ($r) {
-            try {
-                if ($r->participantRecuperation) {
-                    Mail::to($r->email)->send(new ParticipantRecuperation($r));
-                } else {
-                    Mail::to($r->email)->send(new AnniversaryJourneyConfirmation($r));
-                }
-                $r->update(['payment_email_sent' => now()]);
-            } catch (\Exception $e) {
-                $this->error("Error sending email to {$r->email}");
-            }
-        });
+        //
     }
 }

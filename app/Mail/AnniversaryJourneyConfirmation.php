@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
-use App\Models\Registration;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -16,9 +16,9 @@ class AnniversaryJourneyConfirmation extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public Registration $registration
-    ) {
+    public function __construct()
+    {
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class AnniversaryJourneyConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Information pour le paiement - Journée anniversaire, 60 ans de la brigade des flambeaux de l'évangile",
+            subject: 'Anniversary Journey Confirmation',
         );
     }
 
@@ -37,7 +37,7 @@ class AnniversaryJourneyConfirmation extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.anniversaryConfirmation',
+            view: 'view.name',
         );
     }
 
