@@ -37,10 +37,8 @@ class SendInscriptionConfirmationEmail extends Command
             // Send the email
             try {
                 if ($registration->participantRecuperation && !$registration->ticket) {
-                    echo "Part recuperation";
                     Mail::to($registration->email)->send(new PartRecuperationConfirmation($registration));
                 } else {
-                    echo "Inscription";
                     //dump($registration->ticket->transport_type);
                     Mail::to($registration->email)->send(new RegistrationConfirmation($registration));
                 }
@@ -50,7 +48,7 @@ class SendInscriptionConfirmationEmail extends Command
                 //$registration->save();
             } catch (\Exception $e) {
                 dump($registration);
-                dd($e);
+                dump($e);
             }
 
         });

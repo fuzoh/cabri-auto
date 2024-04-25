@@ -7,10 +7,10 @@
 
 Bonjour,
 
-Nous vous confirmons avoir reçu votre inscription à la journée anniversaire de notre camp de brigade. Vous trouvez ci dessous un récapitulatif
-des informations que vous avez indiquées aisi que les informations pour le paiement.
+Nous vous confirmons avoir reçu votre inscription à la journée anniversaire de notre camp de brigade. Vous trouvez ci-dessous un récapitulatif
+des informations que vous avez indiquées ainsi que les informations pour le paiement.
 
-Merci de nous écrire en cas d'erreur. La récéption du paiement confirmera votre inscription.
+Merci de nous écrire en cas d'erreur. La réception du paiement confirmera votre inscription.
 
 ---
 
@@ -36,17 +36,17 @@ Noms de vous accompagnants :
 {{ $registration->ticket->companion_names }}
 @else
 
-## Vous avez indiqué venir seul a la journée.
+## Vous avez indiqué venir seul à la journée.
 @endif
 
 
 @if($registration->participantRecuperation)
 
-## Vous avez indiqué que vous repartirez avec les participnats suivant à la fin de la journée :
+## Vous avez indiqué que vous repartirez avec les participants suivants à la fin de la journée :
 
 {{ $registration->participantRecuperation->names }}
 
-Nous rappelons qu'il sont sous votre responsabilité pour le trajet du retour.
+Nous rappelons qu'ils sont sous votre responsabilité pour le trajet du retour.
 @else
 
 ## Vous avez indiqué que vous ne repartirez avec aucun participant après la journée
@@ -83,8 +83,8 @@ Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJ
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::LocalResident)
 
-## Vous avez indiqué que vous habitez dans la région et viendrez de facon autonome.
-Veuillez noter qu'il n'y aura pas de places de parc disponibles sur la comunne de Rossignère.
+## Vous avez indiqué que vous habitez dans la région et viendrez de façon autonome.
+Veuillez noter qu'il n'y aura pas de places de parc disponibles sur la commune de Rossignère.
 
 Les frais d'inscription sont de CHF 5.- par participant de plus de 6 ans.<br>
 Vous avez indiqué {{ $registration->ticket->adult_count }} personnes de plus de 6 ans.<br>
@@ -98,7 +98,7 @@ Lieux : Chemin de la Maraîche 10, 1802 Corseaux
 
 Vous pouvez aussi utiliser la QR facture en pièce jointe.
 
-Pour rappel, la récéption du paiement valide définitivement votre inscription.
+Pour rappel, la réception du paiement valide définitivement votre inscription.
 
 ---
 
