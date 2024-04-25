@@ -6,25 +6,29 @@ use App\Models\Enums\Location;
 use App\Models\Enums\TicketType;
 use App\Models\Enums\TransportType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ticket extends Model
 {
     public $fillable = [
-        'type',
-        'location',
+        'transport_type',
+        'transport_location',
+        'location_autonomous',
+        'baby_count',
+        'adult_count',
+        'companion_names'
     ];
 
     public $casts = [
-        'type' => TicketType::class,
         'transport_type' => TransportType::class,
-        'location' => Location::class,
+        'transport_location' => Location::class,
     ];
 
     public $timestamps = false;
 
-    public function companion(): HasOne
+    public function registration(): BelongsTo
     {
-        return $this->hasOne(Companion::class);
+        return $this->belongsTo(Registration::class);
     }
 }

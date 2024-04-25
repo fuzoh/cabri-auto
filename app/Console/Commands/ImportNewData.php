@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Enums\Location;
 use App\Models\Enums\RegistrationType;
 use App\Models\Enums\TicketType;
+use App\Models\Enums\TransportType;
 use App\Models\Registration;
+use App\Models\Ticket;
 use Illuminate\Console\Command;
 use Rap2hpoutre\FastExcel\FastExcel;
 
@@ -33,8 +35,8 @@ class ImportNewData extends Command
         $collection = (new FastExcel)->import('inscription.xlsx');
         $collection->each(function ($row) {
             dump($row);
-            $r = Registration::create([
-                'form_id' => $row['ID'],
+            $r = Registration::createOrFirst([
+                'form_id' => $row['Id'],
                 'first_name' => $row['Prénom'],
                 'last_name' => $row['Nom'],
                 'email' => $row['Adresse e-mail'],
@@ -44,61 +46,52 @@ class ImportNewData extends Command
                 'form_filled_at' => $row['Completion time'],
             ]);
 
-
-
-
-
-            // Old script
-            if ($row['Je participe à la journée en tant que :'] === 'Je ne participe pas à la journée, mais vient récupérer des participants') {
+            // Case 1 -> only participant recuperation
+            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "Je ne participe pas à la journée mais viens récupérer des participants/responsables") {
                 $r->participantRecuperation()->create([
-                    'names' => $row['Indiquez les noms, prénoms et groupe de tous les enfants que vous allez récupérer. Mettez à la ligne pour chaque personne supplémentaire :'],
+                    'names' => $row["Indiquez les noms, prénoms et groupes de tous les participants/responsables que vous allez récupérer. Indiquez chaque personne supplémentaire sur une nouvelle ligne avec une virgule :"]
                 ]);
+            }
 
-                return; // Stop here for this type of inscription
-            }
-            // Manage 4 form cases
-            $location = null;
-            if ($row['Je participe à la journée en tant que :'] === "Ancien flambeaux (je n'ai pas d'enfant qui participe au camp)") {
-                $r->elder()->create([
-                    'group' => $row['De quel groupe avez-vous fait partie :'],
-                ]);
-                $location = Location::fromCityString($row["Lieux de départ et d'arrivée en train3"]);
-            }
-            if ($row['Je participe à la journée en tant que :'] === 'Parent de participant au camp') {
-                $r->parentParticipantAtCamp()->create([
-                    'get_participant' => $row['Venez-vous récupérer des participants qui terminent le camp louveteaux et/ou lucioles ?'] === 'OUI',
-                    'get_in_car' => $row['Est-ce que vous souhaitez récupérer vos enfants en voiture ?'] === 'OUI',
-                    'get_other_participant' => $row["Récupérez vous des enfants d'une autre famille ?"] === 'OUI',
-                    'names_picked_up' => $row['Indiquez les noms, prénoms et groupe de tous les enfants que vous allez récupérer. Mettez à la ligne pour chaque personne supplémentaire :2'],
-                    'names_visited' => $row['Indiquez les noms, prénoms et groupe de vos enfants, que vous venez visiter :'],
-                ]);
-                dump($r->parentParticipantAtCamp->get_participant);
-                if (! $r->parentParticipantAtCamp->get_in_car && $r->parentParticipantAtCamp->get_participant) {
-                    $location = Location::fromCityString($row["Lieux de départ et d'arrivée en train"]);
+            // Case 2 -> only participation to the day
+            $ticket = new Ticket();
+            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "Je viens uniquement vivre la journée, je n'ai pas de participants à récupérer") {
+                if ($row["Je "] === "Possède un AG et viendrai de manière autonome via les correspondances classiques." ) {
+                    $ticket->transport_type = TransportType::Autonomous;
+                    $ticket->location_autonomous = $row["Indiquez votre ville de départ"];
+                } elseif ($row["Je "] === "Souhaite venir en train via les trains spéciaux organisés.") {
+                    $ticket->transport_type = TransportType::SpecialTrain;
+                    $ticket->transport_location = Location::fromCityString($row["Lieu de départ et d'arrivée en train"]);
+                } else {
+                    throw new \Exception("Unknown transport type for Je");
                 }
             }
-            if ($row['Je participe à la journée en tant que :'] === 'Parent de participant mais qui ne sont pas au camp') {
-                $r->parentMember()->create([
-                    'group' => $row['De quel groupe font partie vos enfants'],
+
+            // Case 3 -> participant recuperation and participation to the day
+            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "M'inscrire à la journée anniversaire et, au passage, y récupérer des participants/responsables") {
+                $r->participantRecuperation()->create([
+                    'names' => $row["Indiquez les noms, prénoms et groupes de tous les participants/responsables que vous allez récupérer. Indiquez chaque personne supplémentaire sur une nouvelle ligne avec une virgule :2"]
                 ]);
-                $location = Location::fromCityString($row["Lieux de départ et d'arrivée en train2"]);
-            }
-            if ($row['Je participe à la journée en tant que :'] === 'Amis, connaissance') {
-                $r->friend()->create();
-                $location = Location::fromCityString($row["Lieux de départ et d'arrivée en train4"]);
+
+                if ($row["Est-ce que vous souhaitez récupérer ces personnes en voiture ? (le prix du parking est de CHF 10.- par voiture)"] === "OUI, en voiture") {
+                    $ticket->transport_type = TransportType::Car;
+                } elseif ($row["Est-ce que vous souhaitez récupérer ces personnes en voiture ? (le prix du parking est de CHF 10.- par voiture)"] === "NON, j'utiliserai les trains organisés") {
+                    $ticket->transport_type = TransportType::SpecialTrain;
+                    $ticket->transport_location = Location::fromCityString($row["Lieu de départ et d'arrivée en train"]);
+                } else {
+                    throw new \Exception("Unknown transport type for participant recuperation");
+                }
             }
 
-            $r->ticket()->create([
-                'type' => $row["Quelle est votre tranche d'age"] === 'Billet adulte (plus de 16 ans)' ? TicketType::Adult : TicketType::Child,
-                'location' => $location,
-            ]);
-            if ($row['Viendrez-vous accompagné à la journée ?'] === 'OUI') {
-                $r->ticket->companion()->create([
-                    'how_many_adults' => $row["Combien d'accompagnant adulte a prévoir en plus de vous ?"],
-                    'how_many_children' => $row["Combien d'accompagnant enfant à prévoir en plus de vous"],
-                    'names' => $row["Merci d'indiquer les prénoms et noms des accompagnants, séparés par des virgules :"],
-                ]);
+            // Accomapgnment
+            if ($row["Serez-vous accompagné-e pour cette journée ?"] === "OUI") {
+                $ticket->baby_count = $row["Combien d'accompagnants de moins de 6 ans, en plus de vous ?"];
+                $ticket->adult_count = $row["Combien d'accompagnants de plus de 6 ans, en plus de vous ?"];
+                $ticket->companion_names = $row["Indiquez les prénoms et noms des accompagants, séparés par des virgules :"];
             }
+
+            $r->ticket()->save($ticket);
+
         });
     }
 }

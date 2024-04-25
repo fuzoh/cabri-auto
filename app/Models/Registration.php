@@ -13,6 +13,7 @@ class Registration extends Model
         'first_name',
         'last_name',
         'email',
+        'type',
         'phone',
         'comment',
         'form_filled_at',
