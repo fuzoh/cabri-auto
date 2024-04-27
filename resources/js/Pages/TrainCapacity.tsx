@@ -7,7 +7,7 @@ const TrainCapacity = ({ totalByCity, totalByCityWithBaby, totalByType }) => {
     return (
         <div className="h-full">
             { totalByType.car }
-            <TrainGraph totalByCity={totalByCity} totalByCityWithBaby={totalByCityWithBaby} />
+            <TrainGraph totalByCity={totalByCity} totalByType={totalByType} />
         </div>
     );
 }
