@@ -51,4 +51,14 @@ class Ticket extends Model
     {
         return $this->totalTransportPrice() + $this->totalJourneyPrice();
     }
+
+    public function totalAdultPassengers(): int
+    {
+        return 1 + $this->adult_count;
+    }
+
+    public function totalPassengers(): int
+    {
+        return 1 + $this->adult_count + $this->baby_count;
+    }
 }

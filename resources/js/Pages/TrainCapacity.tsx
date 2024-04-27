@@ -2,10 +2,12 @@ import {PageProps} from "@/types";
 import GenericLayout from "@/Layouts/GenericLayout";
 import TrainGraph from "@/Components/TrainGraph";
 
-const TrainCapacity = ({ auth } : PageProps) => {
+const TrainCapacity = ({ totalByCity, totalByCityWithBaby, totalByType }) => {
+
     return (
         <div className="h-full">
-            <TrainGraph />
+            { totalByType.car }
+            <TrainGraph totalByCity={totalByCity} totalByCityWithBaby={totalByCityWithBaby} />
         </div>
     );
 }

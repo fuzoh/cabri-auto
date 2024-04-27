@@ -3,11 +3,19 @@
 namespace App\Models;
 
 use App\Models\Enums\RegistrationType;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Registration extends Model
 {
+    use HasUuids;
+
+    public function uniqueIds(): array
+    {
+        return ['payment_id'];
+    }
+
     public $fillable = [
         'form_id',
         'first_name',
