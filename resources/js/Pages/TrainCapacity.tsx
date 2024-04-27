@@ -1,11 +1,13 @@
-import {Head} from '@inertiajs/react'
-import {PageProps} from '@/types';
+import {PageProps} from "@/types";
+import GenericLayout from "@/Layouts/GenericLayout";
+import TrainGraph from "@/Components/TrainGraph";
 
-export default function Welcome({auth}: PageProps) {
+const TrainCapacity = ({ auth } : PageProps) => {
     return (
-        <>
-            <Head title="Suivi de la capacité des trains"/>
-            <h1>Welcome</h1>
-        </>
-    )
+        <div className="h-full">
+            <TrainGraph />
+        </div>
+    );
 }
+
+export default TrainCapacity
