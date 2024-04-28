@@ -11,6 +11,8 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "rap2hpoutre/fast-excel": "^5.4",
+        "sprain/swiss-qr-bill": "^4.12",
+        "tecnickcom/tcpdf": "^6.7",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

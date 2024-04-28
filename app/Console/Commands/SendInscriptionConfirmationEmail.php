@@ -7,6 +7,16 @@ use App\Mail\RegistrationConfirmation;
 use App\Models\Registration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Sprain\SwissQrBill\DataGroup\Element\AdditionalInformation;
+use Sprain\SwissQrBill\DataGroup\Element\CombinedAddress;
+use Sprain\SwissQrBill\DataGroup\Element\CreditorInformation;
+use Sprain\SwissQrBill\DataGroup\Element\PaymentAmountInformation;
+use Sprain\SwissQrBill\DataGroup\Element\PaymentReference;
+use Sprain\SwissQrBill\PaymentPart\Output\TcPdfOutput\TcPdfOutput;
+use Sprain\SwissQrBill\QrBill;
+use Sprain\SwissQrBill\Reference\QrPaymentReferenceGenerator;
+use TCPDF;
 
 class SendInscriptionConfirmationEmail extends Command
 {
@@ -50,7 +60,6 @@ class SendInscriptionConfirmationEmail extends Command
                 dump($registration);
                 dump($e);
             }
-
         });
     }
 }

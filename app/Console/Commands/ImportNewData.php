@@ -59,14 +59,14 @@ class ImportNewData extends Command
                         ]);
 
                         // Case 1 -> only participant recuperation
-                        if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "Je ne participe pas à la journée mais viens récupérer des participants/responsables") {
+                        if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "C - Je ne participe pas à la journée mais viens récupérer des participants/responsables") {
                             $r->participantRecuperation()->create([
                                 'names' => $row["Indiquez les noms, prénoms et groupes de tous les participants/responsables que vous allez récupérer. Indiquez chaque personne supplémentaire sur une nouvelle ligne avec une virgule :"]
                             ]);
                         } else {
                             // Case 2 -> only participation to the day
                             $ticket = new Ticket();
-                            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "Je viens uniquement vivre la journée, je n'ai pas de participants à récupérer") {
+                            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "B - Je viens uniquement vivre la journée, je n'ai pas de participants/responsables à récupérer") {
                                 if ($row["Je "] === "Possède un AG et viendrai de manière autonome via les correspondances classiques.") {
                                     $ticket->transport_type = TransportType::Autonomous;
                                     $ticket->location_autonomous = $row["Indiquez votre ville de départ"];
@@ -85,7 +85,7 @@ class ImportNewData extends Command
                             }
 
                             // Case 3 -> participant recuperation and participation to the day
-                            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "M'inscrire à la journée anniversaire et, au passage, y récupérer des participants/responsables") {
+                            if ($row["Quel type d'inscription souhaitez-vous effectuer ?"] === "A - Je viens vivre la journée et, au passage, récupérer des participants/responsables") {
                                 $r->participantRecuperation()->create([
                                     'names' => $row["Indiquez les noms, prénoms et groupes de tous les participants/responsables que vous allez récupérer. Indiquez chaque personne supplémentaire sur une nouvelle ligne avec une virgule :2"]
                                 ]);
@@ -110,7 +110,7 @@ class ImportNewData extends Command
                             if ($row["Serez-vous accompagné-e pour cette journée ?"] === "OUI") {
                                 $ticket->baby_count = $row["Combien d'accompagnants de moins de 6 ans, en plus de vous ?"];
                                 $ticket->adult_count = $row["Combien d'accompagnants de plus de 6 ans, en plus de vous ?"];
-                                $ticket->companion_names = $row["Indiquez les prénoms et noms des accompagants, séparés par des virgules :"];
+                                $ticket->companion_names = $row["Indiquez les prénoms et noms des accompagnants, séparés par des virgules :"];
                             }
 
                             $r->ticket()->save($ticket);

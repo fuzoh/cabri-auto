@@ -91,7 +91,12 @@ Vous avez indiqué {{ $registration->ticket->adult_count }} personnes de plus de
 Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
 @endif
 
+---
+
 ## Coordonnées pour le paiement :
+
+Merci d'indiquer le motif de paiement suivant : **"Journée anniversaire - {{ $registration->uuidPart() }}"**<br>
+
 IBAN : CH53 8080 8005 8147 5591 2<br>
 Nom : Le camp de brigade 2024<br>
 Lieux : Chemin de la Maraîche 10, 1802 Corseaux
