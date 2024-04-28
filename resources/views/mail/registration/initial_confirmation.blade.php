@@ -7,8 +7,7 @@
 
 Bonjour,
 
-Nous vous confirmons avoir reçu votre inscription à la journée anniversaire de notre camp de brigade. Vous trouvez ci-dessous un récapitulatif
-des informations que vous avez indiquées ainsi que les informations pour le paiement.
+Nous vous confirmons avoir reçu votre inscription à la journée anniversaire de notre camp de brigade. Vous trouvez ci-dessous un récapitulatif des informations que vous avez indiquées ainsi que les informations pour le paiement.
 
 Merci de nous écrire en cas d'erreur. La réception du paiement confirmera votre inscription.
 
@@ -33,7 +32,7 @@ Merci de nous écrire en cas d'erreur. La réception du paiement confirmera votr
 
 Noms de vous accompagnants :
 
-{{ $registration->ticket->companion_names }}
+*{{ $registration->ticket->companion_names }}*
 @else
 
 ## Vous avez indiqué venir seul à la journée.
@@ -44,7 +43,7 @@ Noms de vous accompagnants :
 
 ## Vous avez indiqué que vous repartirez avec les participants suivants à la fin de la journée :
 
-{{ $registration->participantRecuperation->names }}
+*{{ $registration->participantRecuperation->names }}*
 
 Nous rappelons qu'ils sont sous votre responsabilité pour le trajet du retour.
 @else
@@ -58,8 +57,9 @@ Nous rappelons qu'ils sont sous votre responsabilité pour le trajet du retour.
 ## Vous avez indiqué que vous viendrez en voiture.
 
 Les frais d'inscription sont donc de CHF 5.- par participant de plus de 6 ans.<br>
-Vous avez indiqué {{ $registration->ticket->adult_count }} adultes.<br>
-Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
+Vous avez indiqué {{ $registration->ticket->adult_count }} adultes en plus de vous.<br>
+Le prix du parking est de 10.- CHF par voiture.<br>
+Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() + 10 }}.- CHF**.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::SpecialTrain)
 
@@ -68,46 +68,39 @@ Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJ
 Vous partirez depuis la gare de : **{{ $registration->ticket->transport_location }}**.<br>
 Les informations quant aux horaires de départ vous seront communiquées ultérieurement.
 
-Vous avez indiqué {{ $registration->ticket->adult_count }} participant de plus de 6 ans.<br>
+Vous avez indiqué {{ $registration->ticket->adult_count }} participant de plus de 6 ans en plus de vous.<br>
 Le tarif pour les personnes de plus de 6 ans est de 5.- pour la journée et 20.- pour le transport.<br>
 Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalPrice() }}.- CHF**.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::Autonomous)
 
-## Vous avez indiqué que vous et vos accompagnants avez un AG, et viendrez de manière autonome via les lignes de train standard.
+## Vous avez indiqué que vous et vos accompagnants avez un AG, et viendrez de manière autonome via les lignes de train standards.
 Vous partirez depuis : {{ $registration->ticket->location_autonomous }}
 
 Les frais d'inscription sont donc de CHF 5.- par participant de plus de 6 ans.<br>
-Vous avez indiqué {{ $registration->ticket->adult_count }} adultes.<br>
+Vous avez indiqué {{ $registration->ticket->adult_count }} adultes en plus de vous.<br>
 Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::LocalResident)
 
 ## Vous avez indiqué que vous habitez dans la région et viendrez de façon autonome.
-Veuillez noter qu'il n'y aura pas de places de parc disponibles sur la commune de Rossignère.
+Veuillez noter qu'il n'y aura pas de places de parc disponibles sur la commune de Rossinière.
 
 Les frais d'inscription sont de CHF 5.- par participant de plus de 6 ans.<br>
-Vous avez indiqué {{ $registration->ticket->adult_count }} personnes de plus de 6 ans.<br>
+Vous avez indiqué {{ $registration->ticket->adult_count }} personnes de plus de 6 ans en plus de vous.<br>
 Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
 @endif
 
 ---
 
-## Coordonnées pour le paiement :
+## Paiement
 
-Merci d'indiquer le motif de paiement suivant : **"Journée anniversaire - {{ $registration->uuidPart() }}"**<br>
-
-IBAN : CH53 8080 8005 8147 5591 2<br>
-Nom : Le camp de brigade 2024<br>
-Lieux : Chemin de la Maraîche 10, 1802 Corseaux
-
-Vous pouvez aussi utiliser la QR facture en pièce jointe.
-
-Pour rappel, la réception du paiement valide définitivement votre inscription.
+Merci d'utiliser la QR facture jointe à ce mail pour effectuer le paiement.
+La réception du paiement valide votre inscription à la journée.
 
 ---
 
-Nous vous remercions pour votre inscription et nous réjouissons de vous voir lors du camp,
+Nous vous remercions pour votre inscription et nous réjouissons de vous voir lors de cette journée de célébration,
 
 
 Dans l'intervalle, nos meilleures salutations,

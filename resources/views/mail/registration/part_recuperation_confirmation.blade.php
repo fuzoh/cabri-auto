@@ -2,14 +2,13 @@
 
 *Ceci est un email automatique, merci de ne pas répondre*
 
-# Confirmation des informations pour la récupération de vos particiapants à la fin du camp de brigade
+# Confirmation des informations pour la récupération de vos participants à la fin du camp de brigade
 
 
 Bonjour,
 
 Nous vous confirmons avoir reçu les informations pour le retour de vos participants au camp de brigade.
-Vous avez indiqué dans le formulaire que vous ne **participerez pas à la journée anniversaire**, mais **viendrez uniquement récupérer
-vos participants à la fin de la journée** du **20 juillet 2024**.
+Vous avez indiqué dans le formulaire que vous ne **participerez pas à la journée anniversaire**, mais **viendrez uniquement récupérer vos participants à la fin de la journée** du **20 juillet 2024**.
 
 ---
 
@@ -24,18 +23,18 @@ Voici un récapitulatif des informations que vous avez indiqué:
 
 **Participants que vous récupérerez :**
 
-{{ $registration->participantRecuperation->names }}
+*{{ $registration->participantRecuperation->names }}*
 
 ---
 
-Nous vous rappelons que vous n'aurez pas le temps de visiter le camp. La durée d'arrêt sur le parking ne pouvant être que de quelques minutes.
+Nous vous rappelons que vous n'aurez pas la possibilité de visiter le camp. La durée d'arrêt sur le parking ne pouvant être que de quelques minutes.
 
-Vous recevrez les horaires précis juste avant le camp, la plage horaire sera vraisemblablement entre 16h30 et 18h.
-
-Nous vous remercions pour votre inscription et nous réjouissons de vous voir lors du camp,
+Vous recevrez les horaires précis juste avant le camp, la plage horaire sera vraisemblablement entre 17h et 18h.
 
 
-Dans l'intervalle, nos meilleures salutations,
+
+Merci vous remercions de votre inscription,
+Nos meilleures salutations,
 
 La maîtrise de coordination du camp de brigade.
 

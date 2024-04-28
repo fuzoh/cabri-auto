@@ -17,6 +17,7 @@ use Sprain\SwissQrBill\DataGroup\Element\CombinedAddress;
 use Sprain\SwissQrBill\DataGroup\Element\CreditorInformation;
 use Sprain\SwissQrBill\DataGroup\Element\PaymentAmountInformation;
 use Sprain\SwissQrBill\DataGroup\Element\PaymentReference;
+use Sprain\SwissQrBill\DataGroup\Element\StructuredAddress;
 use Sprain\SwissQrBill\PaymentPart\Output\TcPdfOutput\TcPdfOutput;
 use Sprain\SwissQrBill\QrBill;
 use Sprain\SwissQrBill\Reference\QrPaymentReferenceGenerator;
@@ -64,13 +65,18 @@ class RegistrationConfirmation extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromData(fn () => $this->genrateQrFacture(
-                $this->billAmount(),
-                $this->registration->payment_id,
-                $this->registration->email,
-                $this->registration->first_name,
-                $this->registration->last_name
-            ), "Facture.pdf")->withMime('application/pdf')
+            //Attachment::fromStorage('qr-facture-journee-anniverssaire.pdf')
+            //    ->as("facture.pdf")
+            //    ->withMime('application/pdf'),
+            Attachment::fromData(fn () =>
+                $this->genrateQrFacture(
+                    $this->billAmount(),
+                    $this->registration->uuidPart(),
+                    $this->registration->email,
+                    $this->registration->first_name,
+                    $this->registration->last_name
+                ), 'facture.pdf')
+                ->withMime('application/pdf'),
         ];
     }
 
@@ -94,50 +100,53 @@ class RegistrationConfirmation extends Mailable
                 "Le camp de brigade 2024",
                 "Chemin de la Maraîche 10",
                 "1802 Corseaux",
-                "Suisse"
+                "CH"
             )
         );
         $qrBill->setCreditorInformation(CreditorInformation::create("CH5380808005814755912"));
-        $qrBill->setUltimateDebtor(
-            CombinedAddress::create(
-                $first_name . " " . $last_name,
-                "",
-                "",
-                ""
-            )
-        );
         $qrBill->setPaymentAmountInformation(
             PaymentAmountInformation::create(
                 "CHF",
                 $amount
             )
         );
-        $refNumber = QrPaymentReferenceGenerator::generate(
+        /*$refNumber = QrPaymentReferenceGenerator::generate(
             null,
             $uuid
-        );
+        );*/
         $qrBill->setPaymentReference(
             PaymentReference::create(
-                PaymentReference::TYPE_QR,
-                $refNumber
+                PaymentReference::TYPE_NON
             )
         );
         $qrBill->setAdditionalInformation(
             AdditionalInformation::create(
-                "Frais d'inscription journée anniversaire camp de brigade 2024"
+                "Journée anniversaire - $uuid"
             )
         );
 
-        $tcPdf = new TCPDF('P', 'mm', 'A4', true, 'ISO-8859-1');
-        $tcPdf->setPrintHeader(false);
-        $tcPdf->setPrintFooter(false);
-        $tcPdf->AddPage();
-        $output = new TcPdfOutput($qrBill, 'en', $tcPdf);
-        $output
-            ->setPrintable(false)
-            ->getPaymentPart();
+        $v = $qrBill->getViolations();
 
-        return $tcPdf->Output("Facture $first_name $last_name.pdf", 'E');
-        //Storage::put("$uuid.pdf", $tcPdf->Output("$uuid.pdf", "S"));
+        //foreach ($v as $m) {
+        //    dump($m->getCause());
+        //    dump($m->getConstraint());
+        //    dump($m->getMessage());
+        //}
+
+        try {
+            $tcPdf = new TCPDF('P', 'mm', 'A4', true, 'ISO-8859-1');
+            $tcPdf->setPrintHeader(false);
+            $tcPdf->setPrintFooter(false);
+            $tcPdf->AddPage();
+            $output = new TcPdfOutput($qrBill, 'en', $tcPdf);
+            $output
+                ->setPrintable(false)
+                ->getPaymentPart();
+
+            return $tcPdf->Output("Facture $first_name $last_name.pdf", 'S');
+            //Storage::put("$uuid.pdf", $tcPdf->Output("$uuid.pdf", "S"));
+        } catch (\Exception $e) {
+            throw new \Exception("Failed to generate QR bill: " . $e->getMessage());
+        }
     }
 }
