@@ -18,7 +18,7 @@ class Registration extends Model
 
     public function uuidPart()
     {
-        return substr($this->payment_id, 0, 8);
+        return substr($this->payment_id, 9, 9);
     }
 
     public $fillable = [
