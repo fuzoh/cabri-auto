@@ -8,6 +8,7 @@ use App\Models\Registration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Sprain\SwissQrBill\DataGroup\Element\AdditionalInformation;
 use Sprain\SwissQrBill\DataGroup\Element\CombinedAddress;
 use Sprain\SwissQrBill\DataGroup\Element\CreditorInformation;
@@ -45,6 +46,15 @@ class SendInscriptionConfirmationEmail extends Command
         // Send the confirmation email
         $registrations->each(function (Registration $registration) {
             // Send the email
+
+            $validator = Validator::make(['email' => $registration->email], [
+                'email' => 'required|email',
+            ]);
+            if ($validator->fails()) {
+                dump($registration);
+                dump($validator->errors());
+                return;
+            }
             try {
                 if ($registration->participantRecuperation && !$registration->ticket) {
                     Mail::to($registration->email)->send(new PartRecuperationConfirmation($registration));
@@ -54,8 +64,8 @@ class SendInscriptionConfirmationEmail extends Command
                 }
 
                 // Mark the registration as having received the email
-                //$registration->payment_email_sent = now();
-                //$registration->save();
+                $registration->payment_email_sent = now();
+                $registration->save();
             } catch (\Exception $e) {
                 dump($registration);
                 dump($e);

@@ -12,6 +12,7 @@ use App\Models\Registration;
 use App\Models\Ticket;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 class ImportNewData extends Command
@@ -49,9 +50,9 @@ class ImportNewData extends Command
                     DB::transaction(function () use ($row) {
                         $r = Registration::create([
                             'form_id' => $row['ID'],
-                            'first_name' => $row['Prénom'],
-                            'last_name' => $row['Nom'],
-                            'email' => $row['Adresse e-mail'],
+                            'first_name' => Str::trim($row['Prénom']),
+                            'last_name' => Str::trim($row['Nom']),
+                            'email' => Str::trim($row['Adresse e-mail']),
                             'phone' => $row['Numéro de téléphone mobile (atteignable le jour même)'],
                             'comment' => $row['Informations supplémentaires, commentaires, remarques :'],
                             'type' => RegistrationType::fromFromString($row['Vous êtes :']),
