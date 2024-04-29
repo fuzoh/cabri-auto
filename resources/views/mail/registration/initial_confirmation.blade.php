@@ -32,7 +32,7 @@ Merci de nous écrire en cas d'erreur. La réception du paiement confirmera votr
 
 Noms de vous accompagnants :
 
-*{{ $registration->ticket->companion_names }}*
+<i>{{ $registration->ticket->companion_names }}</i>
 @else
 
 ## Vous avez indiqué venir seul à la journée.
@@ -43,7 +43,7 @@ Noms de vous accompagnants :
 
 ## Vous avez indiqué que vous repartirez avec les participants suivants à la fin de la journée :
 
-*{{ $registration->participantRecuperation->names }}*
+<i>{{ $registration->participantRecuperation->names }}</i>
 
 Nous rappelons qu'ils sont sous votre responsabilité pour le trajet du retour.
 @else

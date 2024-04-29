@@ -23,7 +23,7 @@ Voici un récapitulatif des informations que vous avez indiqué:
 
 **Participants que vous récupérerez :**
 
-*{{ $registration->participantRecuperation->names }}*
+<i>{{ $registration->participantRecuperation->names }}</i>
 
 ---
 
