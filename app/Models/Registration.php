@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Enums\RegistrationType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Registration extends Model
@@ -49,5 +50,10 @@ class Registration extends Model
     public function participantRecuperation(): HasOne
     {
         return $this->hasOne(ParticipantRecuperation::class);
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class, 'payment_confirmation_id');
     }
 }
