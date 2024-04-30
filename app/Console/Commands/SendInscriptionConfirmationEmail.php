@@ -41,7 +41,9 @@ class SendInscriptionConfirmationEmail extends Command
     public function handle()
     {
         // Final all registration that did not receive a confirmation email
-        $registrations = Registration::whereNull('payment_email_sent')->get();
+        $registrations = Registration::whereNull('payment_email_sent')
+            ->whereNull('cancelled_at')
+            ->get();
 
         // Send the confirmation email
         $registrations->each(function (Registration $registration) {
