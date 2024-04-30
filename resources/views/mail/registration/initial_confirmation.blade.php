@@ -30,7 +30,7 @@ Merci de nous écrire en cas d'erreur. La réception du paiement confirmera votr
 
 **{{ $registration->ticket->adult_count }}** personnes de plus de 6 ans.
 
-Noms de vous accompagnants :
+Noms de vos accompagnants :
 
 <i>{{ $registration->ticket->companion_names }}</i>
 @else
