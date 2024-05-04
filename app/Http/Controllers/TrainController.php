@@ -53,10 +53,14 @@ class TrainController extends Controller
             }, 0);
         });
 
+        $onlyPartRecuperation = Registration::whereHas('participantRecuperation')->doesntHave('ticket')->get();
+        $total_only_part_recuperation = count($onlyPartRecuperation);
+
         return Inertia::render('TrainCapacity', [
             'totalByCity' => $total_by_city,
             'totalByCityWithBaby' => $total_by_city_with_baby,
             'totalByType' => $total_by_type,
+            'totalOnlyPartRecuperation' => $total_only_part_recuperation,
         ]);
     }
 }
