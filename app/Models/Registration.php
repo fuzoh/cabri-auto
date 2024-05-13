@@ -56,4 +56,9 @@ class Registration extends Model
     {
         return $this->belongsTo(Payment::class, 'payment_confirmation_id');
     }
+
+    public function essentials(): string
+    {
+        return $this->first_name . ' ' . $this->last_name . ' (' . $this->email . ')' . ' - ' . $this->ticket->price();
+    }
 }
