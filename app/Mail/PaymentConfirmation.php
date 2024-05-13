@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Registration;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,7 +17,7 @@ class PaymentConfirmation extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public Registration $registration)
     {
         //
     }
@@ -27,7 +28,7 @@ class PaymentConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Payment Confirmation',
+            subject: 'Confirmation de paiement - journée anniversaire - 60 ans de la Brigade des Flambeaux',
         );
     }
 

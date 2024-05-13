@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\PaymentConfirmation;
+use App\Models\Registration;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentConfirmationEmail extends Command
 {
@@ -25,6 +28,21 @@ class PaymentConfirmationEmail extends Command
      */
     public function handle()
     {
-        //
+        // get all registrations with an associated payment
+        $registrations = Registration::whereNotNull('payment_confirmation_id')
+            ->whereNull('payment_confirmation_email_sent')
+            ->get();
+
+        foreach ($registrations as $registration) {
+            // Send the email
+            try {
+                Mail::to($registration->email)->send(new PaymentConfirmation($registration));
+                $registration->payment_confirmation_email_sent = now();
+                $registration->save();
+            } catch (\Exception $e) {
+                dump($registration);
+                dump($e->getMessage());
+            }
+        }
     }
 }
