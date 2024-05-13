@@ -61,4 +61,18 @@ class Ticket extends Model
     {
         return 1 + $this->adult_count + $this->baby_count;
     }
+
+    public function price(): int
+    {
+        if ($this->transport_type === TransportType::Car) {
+            return $this->totalJourneyPrice() + 10;
+        } elseif ($this->transport_type === TransportType::SpecialTrain) {
+            return $this->totalPrice();
+        } elseif ($this->transport_type === TransportType::Autonomous) {
+            return $this->totalJourneyPrice();
+        } elseif ($this->transport_type === TransportType::LocalResident) {
+            return $this->totalJourneyPrice();
+        }
+        return 0;
+    }
 }
