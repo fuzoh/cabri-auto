@@ -11,13 +11,18 @@ class Payment extends Model
         'payment_date',
         'imported_at',
         'data_message',
+        'name',
         'amount',
+        'iban',
+        'uetr',
     ];
 
     public $casts = [
         'payment_date' => 'datetime',
         'imported_at' => 'datetime',
     ];
+
+    public $timestamps = false;
 
     public function registration(): HasOne
     {
