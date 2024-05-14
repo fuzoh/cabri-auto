@@ -33,6 +33,9 @@ class PaymentConfirmationEmail extends Command
             ->whereNull('payment_confirmation_email_sent')
             ->get();
 
+        $bar = $this->output->createProgressBar(count($registrations));
+        $bar->start();
+
         foreach ($registrations as $registration) {
             // Send the email
             try {
@@ -42,7 +45,11 @@ class PaymentConfirmationEmail extends Command
             } catch (\Exception $e) {
                 dump($registration);
                 dump($e->getMessage());
+            } finally {
+                $bar->advance();
             }
         }
+
+        $bar->finish();
     }
 }

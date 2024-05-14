@@ -43,7 +43,10 @@ class ImportNewData extends Command
             'imported_file' => $collection->toJson()
         ]);
 
-        $collection->each(function ($row) use ($i) {
+        $bar = $this->output->createProgressBar(count($collection));
+        $bar->start();
+
+        $collection->each(function ($row) use ($i, $bar) {
             //dump($row);
             try {
                 Registration::where('form_id', $row['ID'])->firstOr(function () use ($row) {
@@ -124,7 +127,11 @@ class ImportNewData extends Command
                     'failed_form_row_id' => $row['ID'],
                     'exception' => $e->getMessage()
                 ]);
+            } finally {
+                $bar->advance();
             }
         });
+
+        $bar->finish();
     }
 }
