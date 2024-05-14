@@ -7,17 +7,7 @@ use App\Mail\RegistrationConfirmation;
 use App\Models\Registration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Sprain\SwissQrBill\DataGroup\Element\AdditionalInformation;
-use Sprain\SwissQrBill\DataGroup\Element\CombinedAddress;
-use Sprain\SwissQrBill\DataGroup\Element\CreditorInformation;
-use Sprain\SwissQrBill\DataGroup\Element\PaymentAmountInformation;
-use Sprain\SwissQrBill\DataGroup\Element\PaymentReference;
-use Sprain\SwissQrBill\PaymentPart\Output\TcPdfOutput\TcPdfOutput;
-use Sprain\SwissQrBill\QrBill;
-use Sprain\SwissQrBill\Reference\QrPaymentReferenceGenerator;
-use TCPDF;
 
 class SendInscriptionConfirmationEmail extends Command
 {
@@ -45,8 +35,11 @@ class SendInscriptionConfirmationEmail extends Command
             ->whereNull('cancelled_at')
             ->get();
 
+        $bar = $this->output->createProgressBar(count($registrations));
+        $bar->start();
+
         // Send the confirmation email
-        $registrations->each(function (Registration $registration) {
+        $registrations->each(function (Registration $registration) use ($bar) {
             // Send the email
 
             $validator = Validator::make(['email' => $registration->email], [
@@ -55,10 +48,11 @@ class SendInscriptionConfirmationEmail extends Command
             if ($validator->fails()) {
                 dump($registration);
                 dump($validator->errors());
+
                 return;
             }
             try {
-                if ($registration->participantRecuperation && !$registration->ticket) {
+                if ($registration->participantRecuperation && ! $registration->ticket) {
                     Mail::to($registration->email)->send(new PartRecuperationConfirmation($registration));
                 } else {
                     //dump($registration->ticket->transport_type);
@@ -71,7 +65,11 @@ class SendInscriptionConfirmationEmail extends Command
             } catch (\Exception $e) {
                 dump($registration);
                 dump($e);
+            } finally {
+                $bar->advance();
             }
         });
+
+        $bar->finish();
     }
 }

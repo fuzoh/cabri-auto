@@ -35,7 +35,7 @@ class ImportPaymentConfirmations extends Command
 
         foreach ($payments as $payment) {
             try {
-                if ($payment['CdtDbtInd'] === 'CRDT') {
+                if ($payment['CdtDbtInd'] === 'CRDT') { // Import only credits
                     $dBpayment = Payment::where('uetr', $payment['NtryDtls']['TxDtls']['Refs']['UETR'])->first();
                     if ($dBpayment) {
                         $this->info("Payment already exists {$dBpayment->uetr}");

@@ -5,8 +5,6 @@ namespace App\Mail;
 use App\Models\Enums\TransportType;
 use App\Models\Registration;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Mail\Attachable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Attachment;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -17,7 +15,6 @@ use Sprain\SwissQrBill\DataGroup\Element\CombinedAddress;
 use Sprain\SwissQrBill\DataGroup\Element\CreditorInformation;
 use Sprain\SwissQrBill\DataGroup\Element\PaymentAmountInformation;
 use Sprain\SwissQrBill\DataGroup\Element\PaymentReference;
-use Sprain\SwissQrBill\DataGroup\Element\StructuredAddress;
 use Sprain\SwissQrBill\PaymentPart\Output\TcPdfOutput\TcPdfOutput;
 use Sprain\SwissQrBill\QrBill;
 use Sprain\SwissQrBill\Reference\QrPaymentReferenceGenerator;
@@ -32,8 +29,7 @@ class RegistrationConfirmation extends Mailable
      */
     public function __construct(
         public Registration $registration,
-    )
-    {
+    ) {
         //
     }
 
@@ -68,14 +64,13 @@ class RegistrationConfirmation extends Mailable
             //Attachment::fromStorage('qr-facture-journee-anniverssaire.pdf')
             //    ->as("facture.pdf")
             //    ->withMime('application/pdf'),
-            Attachment::fromData(fn () =>
-                $this->genrateQrFacture(
-                    $this->billAmount(),
-                    $this->registration->uuidPart(),
-                    $this->registration->email,
-                    $this->registration->first_name,
-                    $this->registration->last_name
-                ), 'facture.pdf')
+            Attachment::fromData(fn () => $this->genrateQrFacture(
+                $this->billAmount(),
+                $this->registration->uuidPart(),
+                $this->registration->email,
+                $this->registration->first_name,
+                $this->registration->last_name
+            ), 'facture.pdf')
                 ->withMime('application/pdf'),
         ];
     }
@@ -89,7 +84,7 @@ class RegistrationConfirmation extends Mailable
         } elseif ($this->registration->ticket->transport_type === TransportType::Autonomous || $this->registration->ticket->transport_type === TransportType::LocalResident) {
             return $this->registration->ticket->totalJourneyPrice();
         }
-        throw new \Exception("Unknown transport type");
+        throw new \Exception('Unknown transport type');
     }
 
     private function genrateQrFacture($amount, $uuid, $email, $first_name, $last_name)
@@ -97,16 +92,16 @@ class RegistrationConfirmation extends Mailable
         $qrBill = QrBill::create();
         $qrBill->setCreditor(
             CombinedAddress::create(
-                "Le camp de brigade 2024",
-                "Chemin de la Maraîche 10",
-                "1802 Corseaux",
-                "CH"
+                'Le camp de brigade 2024',
+                'Chemin de la Maraîche 10',
+                '1802 Corseaux',
+                'CH'
             )
         );
-        $qrBill->setCreditorInformation(CreditorInformation::create("CH5380808005814755912"));
+        $qrBill->setCreditorInformation(CreditorInformation::create('CH5380808005814755912'));
         $qrBill->setPaymentAmountInformation(
             PaymentAmountInformation::create(
-                "CHF",
+                'CHF',
                 $amount
             )
         );
@@ -146,7 +141,7 @@ class RegistrationConfirmation extends Mailable
             return $tcPdf->Output("Facture $first_name $last_name.pdf", 'S');
             //Storage::put("$uuid.pdf", $tcPdf->Output("$uuid.pdf", "S"));
         } catch (\Exception $e) {
-            throw new \Exception("Failed to generate QR bill: " . $e->getMessage());
+            throw new \Exception('Failed to generate QR bill: '.$e->getMessage());
         }
     }
 }
