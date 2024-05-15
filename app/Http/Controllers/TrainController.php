@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Enums\TransportType;
 use App\Models\Registration;
 use App\Models\Ticket;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TrainController extends Controller
@@ -37,21 +37,23 @@ class TrainController extends Controller
         $by_city = $special_train
             ->groupBy('transport_location');
 
-        $total_by_type = $trasport_type->map(function($t) {
-            return $t->reduce(function($carry, $item) {
+        $total_by_type = $trasport_type->map(function ($t) {
+            return $t->reduce(function ($carry, $item) {
                 return $carry + $item->totalPassengers();
             }, 0);
         });
-        $total_by_city = $by_city->map(function($t) {
-            return $t->reduce(function($carry, $item) {
+        $total_by_city = $by_city->map(function ($t) {
+            return $t->reduce(function ($carry, $item) {
                 return $carry + $item->totalAdultPassengers();
             }, 0);
         });
-        $total_by_city_with_baby = $by_city->map(function($t) {
-            return $t->reduce(function($carry, $item) {
+        $total_by_city_with_baby = $by_city->map(function ($t) {
+            return $t->reduce(function ($carry, $item) {
                 return $carry + $item->totalPassengers();
             }, 0);
         });
+        $car_type_count = Ticket::where('transport_type', TransportType::Car)
+            ->count();
 
         $onlyPartRecuperation = Registration::whereHas('participantRecuperation')->doesntHave('ticket')->get();
         $total_only_part_recuperation = count($onlyPartRecuperation);
@@ -61,6 +63,7 @@ class TrainController extends Controller
             'totalByCityWithBaby' => $total_by_city_with_baby,
             'totalByType' => $total_by_type,
             'totalOnlyPartRecuperation' => $total_only_part_recuperation,
+            'carTypeCount' => $car_type_count,
         ]);
     }
 }

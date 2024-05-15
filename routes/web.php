@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InformationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainController;
 use Illuminate\Foundation\Application;
@@ -7,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [TrainController::class, 'index']);
+
+Route::get('/informations', [InformationsController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

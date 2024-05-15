@@ -11,7 +11,7 @@ const nodeTypes = {
     other: NoHandleNode,
 }
 
-export default function TrainGraph({ totalByCity, totalByType, onlyPartRecuperation }) {
+export default function TrainGraph({ totalByCity, totalByType, onlyPartRecuperation, carTypeCount }) {
 
     let loads = trainLoadCalculator(
         totalByCity.Neuchatel ?? 0,
@@ -37,7 +37,7 @@ export default function TrainGraph({ totalByCity, totalByType, onlyPartRecuperat
       { id: '7', position: { x: 400, y: 150 }, data: { label: 'Lausanne', total: totalByCity.Lausanne ?? 0  }, type: 'station' },
       { id: '8', position: { x: 600, y: 200 }, data: { label: 'Montreux', total: totalByCity.Montreux ?? 0  }, type: 'station' },
       { id: '9', position: { x: 0, y: 0 }, data: { label: 'Bienne', total: totalByCity.Bienne ?? 0  }, type: 'station' },
-      { id: '10', position: { x: 300, y: -50 }, data: { label: 'Auto', total: totalByType.car }, type: 'other' },
+      { id: '10', position: { x: 270, y: -50 }, data: { label: `${carTypeCount} voitures`, total: totalByType.car }, type: 'other' },
       { id: '11', position: { x: 400, y: -50 }, data: { label: 'AG', total: totalByType.autonomous }, type: 'other' },
       { id: '12', position: { x: 500, y: -50 }, data: { label: 'Region', total: totalByType.local_resident }, type: 'other' },
       { id: '13', position: { x: 600, y: -50 }, data: { label: 'TOTAL', total: grandTotal }, type: 'other' },
