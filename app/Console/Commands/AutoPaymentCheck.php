@@ -46,11 +46,14 @@ class AutoPaymentCheck extends Command
                 });
                 // If there is a matching registration, link the payment to the registration
                 if ($registration) {
-                    $this->info('Found a registration for the payment');
+                    $this->info('---- Found a registration for the payment ----');
                     $this->info($registration->email);
+                    $this->info($registration->payment_id);
                     $this->info($registration->ticket->price());
+                    $this->info('-- Payment --');
                     $this->info($payment->amount);
                     $this->info($payment->name);
+                    $this->info($payment->data_message);
                     if ($registration->ticket->price() === $payment->amount) {
                         $registration->payment()->associate($payment);
                         $registration->save();
@@ -66,6 +69,7 @@ class AutoPaymentCheck extends Command
                     $this->info($payment->amount);
                     $this->info($payment->data_message);
                 }
+                $this->info('---------------------------------------------');
             }
         }
     }

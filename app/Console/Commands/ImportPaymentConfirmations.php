@@ -74,7 +74,7 @@ class ImportPaymentConfirmations extends Command
                         'amount' => $payment['Amt'],
                     ]);
                 } else {
-                    $this->warn('Nothing added in DB');
+                    $this->warn('Entry not added to DB');
                 }
             }
         }
