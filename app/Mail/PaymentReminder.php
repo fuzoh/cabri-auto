@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Registration;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,7 +17,9 @@ class PaymentReminder extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(
+        public Registration $registration,
+    )
     {
         //
     }
@@ -27,7 +30,7 @@ class PaymentReminder extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Payment Reminder',
+            subject: "Rappel de paiement - Journée anniversaire, 60 ans de la brigade des flambeaux de l'évangile",
         );
     }
 
