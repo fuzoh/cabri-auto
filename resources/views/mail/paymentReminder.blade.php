@@ -10,7 +10,8 @@ Vous avez récemment effectué une inscription à la journée anniversaire de no
 Nous vous en remercions. À ce jour nous n'avons pas encore reçu votre paiement. Si cela est dû à un oubli,
 nous vous remercions de bien vouloir effectuer le paiement dans de brefs délais.
 Si vous avez effectué le paiement hier ou aujourd'hui, vous pouvez ignorer ce message.
-Si vous avez bien fait le paiement, merci de bien vouloir nous envoyer une copie du justificatif de virement, afin que nous pussions retrouver le paiement correspondant dans notre système.
+Si vous avez bien fait le paiement, merci de bien vouloir nous envoyer une copie du justificatif de virement,
+afin que nous pussions retrouver le paiement correspondant dans notre système.
 
 Pour rappel, vous avez complété votre inscription le {{ $registration->form_filled_at->format('d.m.Y') }}.
 Vous avez reçu le mail de confirmation le {{ $registration->payment_email_sent->format('d.m.Y') }}.

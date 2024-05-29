@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\PaymentReminder;
+use App\Models\Registration;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SendPaymentReminderEmail extends Command
 {
@@ -25,6 +28,28 @@ class SendPaymentReminderEmail extends Command
      */
     public function handle()
     {
-        //
+        // Get the registrations that have not yet paid and recieve the confirmation email from more than 10 days
+        $registrations = Registration::whereNull('payment_confirmation_id')
+            ->where('payment_email_sent', '<', now()->subDays(10))
+            ->get();
+
+        $bar = $this->output->createProgressBar(count($registrations));
+        $bar->start();
+
+        foreach ($registrations as $registration) {
+            // Send the email
+            try {
+                Mail::to($registration->email)->send(new PaymentReminder($registration));
+                $remind = new \App\Models\PaymentReminder(['sent_at' => now()]);
+                $registration->paymentReminders()->save($remind);
+            } catch (\Exception $e) {
+                dump($registration);
+                dump($e->getMessage());
+            } finally {
+                $bar->advance();
+            }
+        }
+
+        $bar->finish();
     }
 }
