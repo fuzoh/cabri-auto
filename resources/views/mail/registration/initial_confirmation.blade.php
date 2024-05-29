@@ -59,7 +59,7 @@ Nous rappelons qu'ils sont sous votre responsabilité pour le trajet du retour.
 Les frais d'inscription sont donc de CHF 5.- par participant de plus de 6 ans.<br>
 Vous avez indiqué {{ $registration->ticket->adult_count }} adultes en plus de vous.<br>
 Le prix du parking est de 10.- CHF par voiture.<br>
-Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() + 10 }}.- CHF**.
+Le total de finance d'inscription est donc de **{{ $registration->ticket->price() }}.- CHF**.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::SpecialTrain)
 
@@ -70,7 +70,7 @@ Les informations quant aux horaires de départ vous seront communiquées ultéri
 
 Vous avez indiqué {{ $registration->ticket->adult_count }} participant de plus de 6 ans en plus de vous.<br>
 Le tarif pour les personnes de plus de 6 ans est de 5.- pour la journée et 20.- pour le transport.<br>
-Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalPrice() }}.- CHF**.
+Le total de votre finance d'inscription est donc de **{{ $registration->ticket->price() }}.- CHF**.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::Autonomous)
 
@@ -79,7 +79,7 @@ Vous partirez depuis : {{ $registration->ticket->location_autonomous }}
 
 Les frais d'inscription sont donc de CHF 5.- par participant de plus de 6 ans.<br>
 Vous avez indiqué {{ $registration->ticket->adult_count }} adultes en plus de vous.<br>
-Le total de finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
+Le total de finance d'inscription est donc de **{{ $registration->ticket->price() }}.- CHF**.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::LocalResident)
 
@@ -88,7 +88,7 @@ Veuillez noter qu'il n'y aura pas de places de parc disponibles sur la commune d
 
 Les frais d'inscription sont de CHF 5.- par participant de plus de 6 ans.<br>
 Vous avez indiqué {{ $registration->ticket->adult_count }} personnes de plus de 6 ans en plus de vous.<br>
-Le total de votre finance d'inscription est donc de **{{ $registration->ticket->totalJourneyPrice() }}.- CHF**.
+Le total de votre finance d'inscription est donc de **{{ $registration->ticket->price() }}.- CHF**.
 @endif
 
 ---

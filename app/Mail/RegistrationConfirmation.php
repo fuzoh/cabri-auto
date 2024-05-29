@@ -77,14 +77,7 @@ class RegistrationConfirmation extends Mailable
 
     private function billAmount()
     {
-        if ($this->registration->ticket->transport_type === TransportType::Car) {
-            return $this->registration->ticket->totalJourneyPrice() + 10;
-        } elseif ($this->registration->ticket->transport_type === TransportType::SpecialTrain) {
-            return $this->registration->ticket->totalPrice();
-        } elseif ($this->registration->ticket->transport_type === TransportType::Autonomous || $this->registration->ticket->transport_type === TransportType::LocalResident) {
-            return $this->registration->ticket->totalJourneyPrice();
-        }
-        throw new \Exception('Unknown transport type');
+        return $this->registration->ticket->price();
     }
 
     private function genrateQrFacture($amount, $uuid, $email, $first_name, $last_name)
