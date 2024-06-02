@@ -25,5 +25,7 @@ Nous vous remercions pour votre réactivité et nous réjouissons de vous retrou
 Avec nos meilleures salutations,
 La maîtrise de coordination du camp de brigade.
 
+*P.S. Quelques jours après avoir effectué le paiement, vous recevrez un email de confirmation de paiement.*
+
 *En cas de questions [coordination@cabri24.ch](mailto:coordination@cabri24.ch)*
 </x-mail::message>
