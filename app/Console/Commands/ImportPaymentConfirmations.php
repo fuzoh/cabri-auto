@@ -69,7 +69,7 @@ class ImportPaymentConfirmations extends Command
                         'payment_date' => $payment['ValDt']['Dt'],
                         'imported_at' => now(),
                         'name' => $payment['NtryDtls']['TxDtls']['RltdPties']['Dbtr']['Pty']['Nm'],
-                        'iban' => $payment['NtryDtls']['TxDtls']['RltdPties']['DbtrAcct']['Id']['IBAN'],
+                        'iban' => $payment['NtryDtls']['TxDtls']['RltdPties']['DbtrAcct']['Id']['IBAN'] ?? "pas d'iban ou paiement comptoir",
                         'uetr' => $payment['NtryDtls']['TxDtls']['Refs']['UETR'],
                         'amount' => $payment['Amt'],
                     ]);
