@@ -36,7 +36,8 @@ class AutoPaymentCheck extends Command
 
         foreach ($payments as $payment) {
             // Get payments with an id in the data_message
-            preg_match('/- [a-z0-9]{4}-[a-z0-9]{4}/i', $payment->data_message, $match);
+            $paymentLowercase = mb_strtolower($payment->data_message);
+            preg_match('/- [a-z0-9]{4}-[a-z0-9]{4}/i', $paymentLowercase, $match);
             if (isset($match[0])) {
                 // Get only the uuid part
                 $uuidPart = substr($match[0], 2, 9);
