@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.4](https://github.com/fuzoh/cabri-auto/compare/v0.1.3...v0.1.4) (2024-06-10)
+
+
+### Features
+
+* command to export participants recuperations ([c765fa5](https://github.com/fuzoh/cabri-auto/commit/c765fa5a79509275ad247b5d0ea26ab43df6461c))
+* command to resent confirmation email ([747ea9a](https://github.com/fuzoh/cabri-auto/commit/747ea9a75208060b8c6ba2099169634c8f488d05))
+* lowercase to check payments confirmations ([d0d931d](https://github.com/fuzoh/cabri-auto/commit/d0d931dd8397dfad3ff0c067652f15a40efc3961))
+* message for impossible payments ([540b49c](https://github.com/fuzoh/cabri-auto/commit/540b49c2710f4a080d552aacb9f5607d0f4443cc))
+
+
+### Bug Fixes
+
+* where close now correctly groups the where clause to determine of payment reminder is already sent ([f7a7f6d](https://github.com/fuzoh/cabri-auto/commit/f7a7f6d0ad19ca05cd65298d92b75e6282a33944))
+
 ## [0.1.3](https://github.com/fuzoh/cabri-auto/compare/v0.1.2...v0.1.3) (2024-05-29)
 
 
