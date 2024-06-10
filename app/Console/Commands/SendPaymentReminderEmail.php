@@ -31,9 +31,11 @@ class SendPaymentReminderEmail extends Command
         // Get the registrations that have not yet paid and recieve the confirmation email from more than 10 days
         $registrations = Registration::whereNull('payment_confirmation_id')
             ->whereNull('cancelled_at')
-            ->where('payment_email_sent', '<', now()->subDays(10))
-            ->whereDoesntHave('paymentReminders')
-            ->orWhereRelation('paymentReminders', 'sent_at', '<', now()->subDays(10))
+            ->where('payment_email_sent', '<', now()->subDays(20))
+            ->where(function ($query) {
+                $query->whereDoesntHave('paymentReminders')
+                    ->orWhereRelation('paymentReminders', 'sent_at', '<', now()->subDays(20));
+            })
             ->get();
 
         $bar = $this->output->createProgressBar(count($registrations));
