@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/fuzoh/cabri-auto/compare/v0.1.4...v0.1.5) (2024-06-15)
+
+
+### Features
+
+* add format in participant recuperation export ([0bdf9c4](https://github.com/fuzoh/cabri-auto/commit/0bdf9c423def41afeea5bfacbe00ab69bcdf245c))
+
 ## [0.1.4](https://github.com/fuzoh/cabri-auto/compare/v0.1.3...v0.1.4) (2024-06-10)
 
 
