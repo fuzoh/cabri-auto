@@ -27,7 +27,9 @@ class ParticipantRecuperationList extends Command
      */
     public function handle()
     {
-        $registrations = Registration::whereHas('participantRecuperation')->where('form_filled_at', '>', now()->subDays(6))->get();
+        $registrations = Registration::whereHas('participantRecuperation')
+            ->where('form_filled_at', '>', now()->subDays(15))
+            ->get();
 
         $part = $registrations->map(function ($r) {
             return [

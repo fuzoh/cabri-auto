@@ -3,11 +3,14 @@
 use App\Http\Controllers\InformationsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainController;
+use App\Http\Controllers\TrainWithParts;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [TrainController::class, 'index']);
+
+Route::get('/train-return', [TrainWithParts::class, 'index']);
 
 Route::get('/informations', [InformationsController::class, 'index']);
 
