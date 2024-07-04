@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/fuzoh/cabri-auto/compare/v0.1.5...v0.1.6) (2024-07-04)
+
+
+### Features
+
+* count train occupation with parts ([214a724](https://github.com/fuzoh/cabri-auto/commit/214a724a6dc80ef7f127aff13da425bf3e7e243e))
+
 ## [0.1.5](https://github.com/fuzoh/cabri-auto/compare/v0.1.4...v0.1.5) (2024-06-15)
 
 
