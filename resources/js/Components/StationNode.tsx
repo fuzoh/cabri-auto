@@ -10,7 +10,8 @@ function StationNode({ id, data }: NodeProps<NodeData>) {
     <>
         <div className="p-2 m-2 border border-red-400 rounded-md text-center">
             <p>{data.label}</p>
-            <p><span className="font-medium">{data.total}</span> pers.</p>
+            <p><span className="font-medium">allé {data.total}</span> pers.</p>
+            <p><span className="font-medium">retour {data.totalRetour}</span> pers.</p>
         </div>
 
         <Handle type="target" position={Position.Left}/>

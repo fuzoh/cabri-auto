@@ -8,9 +8,9 @@ export function trainLoadCalculator(
     montreux: number,
     bienne: number
 ) {
-    const neuchatelBulleMax = 362;
-    const nyonBulleMax = 418;
-    const bulleRossiniereMax = 972;
+    const neuchatelBulleMax = 181;
+    const nyonBulleMax = 209;
+    const bulleRossiniereMax = 648;
     const montreuxRossiniereMax = 200;
 
     const neuchatelBulle = neuchatel + yverdon + bienne;

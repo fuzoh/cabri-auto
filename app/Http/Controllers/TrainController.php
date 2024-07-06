@@ -52,6 +52,16 @@ class TrainController extends Controller
                 return $carry + $item->totalPassengers();
             }, 0);
         });
+        $total_by_city_return_with_parts = $by_city->map(function ($t) {
+            return $t->map(function (Ticket $ticket) {
+                $partRecuperation = 0;
+                if ($ticket->registration->participantRecuperation) {
+                    $partRecuperation = count(explode("\n", $ticket->registration->participantRecuperation->names));
+                }
+                return $ticket->totalPassengers() + $partRecuperation;
+            })->reduce(fn ($c, $t) => $c + $t);
+        });
+
         $car_type_count = Ticket::where('transport_type', TransportType::Car)
             ->count();
 
@@ -61,6 +71,7 @@ class TrainController extends Controller
         return Inertia::render('TrainCapacity', [
             'totalByCity' => $total_by_city,
             'totalByCityWithBaby' => $total_by_city_with_baby,
+            'totalByCityReturnWithParts' => $total_by_city_return_with_parts,
             'totalByType' => $total_by_type,
             'totalOnlyPartRecuperation' => $total_only_part_recuperation,
             'carTypeCount' => $car_type_count,
