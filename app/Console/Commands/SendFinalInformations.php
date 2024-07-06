@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Mail\LogisticInformations;
 use App\Mail\PartRecuperationInformations;
+use App\Models\Enums\Location;
+use App\Models\Enums\TransportType;
 use App\Models\Registration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -33,8 +35,10 @@ class SendFinalInformations extends Command
         $registrations = Registration::with(['ticket', 'participantRecuperation'])
             ->whereNotNull('payment_email_sent')
             ->whereNull('cancelled_at')
+            //->whereRelation('ticket', 'transport_type', '=', TransportType::LocalResident)
+            //->whereRelation('ticket', 'transport_location', '=', Location::Bienne)
             ->get()
-            ->random(20);
+            ->random(1);
 
         $bar = $this->output->createProgressBar(count($registrations));
         $bar->start();

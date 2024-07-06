@@ -1,12 +1,12 @@
 <x-mail::message>
-# Informations pratiques - Récupération de vos enfants le 20 juillet à Rossignère
+# Informations pratiques - Récupération de vos enfants le 20 juillet à Rossinière
 
 Bonjour, vous recevez cet e-mail, car vous vous êtes inscrit pour venir récupérer des
 participants au camp des  60 ans de la brigade des flambeaux le 20 juillet en fin de journée.
 
 Voici les informations pratiques :
 
-Vous êtes attendu le samedi **20 juillet entre 17h30 et 18h** à la gare de [Rossignère VD](https://maps.app.goo.gl/qpezx4owitYTRP1W8) (suivre les panneaux routiers et les indications des gilets orange sur place).
+Vous êtes attendu le samedi **20 juillet entre 17h30 et 18h** à la gare de [Rossinière VD](https://maps.app.goo.gl/qpezx4owitYTRP1W8) (suivre les panneaux routiers et les indications des gilets orange sur place).
 Une fois sur place, veuillez vous annoncer aux responsables présents, et leur indiquer les participants
 que vous venez récupérer, afin qu'ils vous annoncent aux bons responsables.
 

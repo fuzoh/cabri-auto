@@ -30,7 +30,7 @@ class LogisticInformations extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Informations pratiques - journée anniverssaire - 60ème de la Brigade des Flambeaux',
+            subject: 'Informations - journée anniversaire - 60ème de la Brigade des Flambeaux',
         );
     }
 

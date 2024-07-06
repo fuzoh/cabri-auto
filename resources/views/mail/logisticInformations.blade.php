@@ -1,8 +1,8 @@
 <x-mail::message>
-# Informations pratiques - Jornée anniversaire des 60 ans de la Brigade des Flambeaux
+# Informations pratiques - Journée anniversaire des 60 ans de la Brigade des Flambeaux
 
 Bonjour, vous recevez cet email car vous êtes inscrits à la journée anniversaire
-du camp des 60 ans de la Brigade des Flambeaux.
+du camp des 60 ans de la Brigade des Flambeaux.
 
 Vous trouvez ci-dessous les informations pratiques qui correspondent à votre inscription, merci de les lire **attentivement** !
 
@@ -16,7 +16,7 @@ format papier, soit sur votre téléphone).
 ## Vous êtes inscrit pour venir via les trains spéciaux organisés
 
 Des trains spéciaux ont été organisés depuis la gare que vous avez indiquée. Ces trains vous emmèneront jusqu'à
-Rossignère. Il s'agit de trains spécialement affrétés pour nous, vous n'avez pas besoin de billets pour monter dedans,
+Rossinière. Il s'agit de trains spécialement affrétés pour nous, vous n'avez pas besoin de billets pour monter dedans,
 il vous faut juste votre inscription (en pièce jointe).
 
 Vous avez indiqué que vous partirez depuis la gare de **{{ $registration->ticket->transport_location }}**,
@@ -32,15 +32,17 @@ Veuillez observer les affichages pour vous retrouver au bon endroit dans le trai
 
 Une fois arrivés à Roissignère, veuillez vous présenter au check-in, juste à côté de la gare.
 
+Pour le retour à la fin de la journée, veillez à observer votre horaire en pièce jointe.
+
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::Car)
 
 ## Vous êtes inscrit pour venir en voiture
 
-Vous pouvez arriver à Rossignère au plus tôt à **9h30, et jusqu'à 11h30 maximum !**
+Vous pouvez arriver à Rossinière au plus tôt à **9h30, et jusqu'à 11h30 maximum !**
 Aux entrées du village, il vous faudra suivre les indications des personnes en gilet orange. Ils vous guideront jusqu'aux différents
 parkings selon le remplissage. Une fois parqué, il faudra vous rendre au check-in à pied (voir plan en annexe).
 
-La journée se terminera à 15h45 ! Attention, vous devrez partir tous en même temps, en effet, les voitures seront pour la majorité
+La journée se terminera à 16h! Attention, vous devrez partir tous en même temps, en effet, les voitures seront pour la majorité
 parquée collée les unes aux autres, certains ne pourront donc pas partir tant que les autres voitures ne seront pas parties.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::LocalResident)
@@ -56,7 +58,7 @@ Merci donc de venir au maximum à pied ou en vélo. Si vous n'avez pas le choix 
 charge, et nous vous remercions de ne pas utiliser de places assisses sur ce petit trajet. Nous tenons à maintenir
 une bonne image des Flambeaux auprès des compagnies ferroviaires qui ont été très arrangeantes avec nous.
 
-Vous pouvez arriver dès **9h30, et jusqu'à 11h30 maximum !**, la journée prendra fin vers 15h45.
+Vous pouvez arriver dès **9h30, et jusqu'à 11h30 maximum !**, la journée prendra fin vers 16h.
 
 @elseif($registration->ticket->transport_type === \App\Models\Enums\TransportType::Autonomous)
 
@@ -67,8 +69,8 @@ Il est important que vous empruntiez les lignes standard CFF, merci de ne pas ut
 les trains spéciaux prévus pour les autres inscriptions à la journée.
 
 Il est de votre responsabilité de planifier votre trajet.
-Vous êtes attendus à Rossinière au plus tôt à 9h30, au plus tard à 11h.
-La journée se terminera à 15h45.
+Vous êtes attendus à Rossinière au plus tôt à **9h30, au plus tard à 11h30**.
+La journée se terminera vers 16h.
 
 @endif
 
@@ -79,7 +81,7 @@ La journée se terminera à 15h45.
 Une fois arrivés a Rossinière, il vous faudra vous rendre, **vous et les personnes qui sont annoncées dans votre inscription** au check-in.
 Vous y recevrez les informations pratiques et votre inscription sera contrôlée.
 
-Le check in se trouve juste au sud de la gare de Rossignère (voir plan en annexe).
+Le check in se trouve [juste au sud de la gare de Rossinière](https://maps.app.goo.gl/yVAQW9UXd8FkAVxe7) (voir plan en annexe).
 Une fois passé le check-in, vous pourrez vous rendre sur le terrain de camp pour la journée, en suivant les instructions des staffs sur place.
 
 **ATTENTION : Merci de ne pas venir directement sur le terrain via un autre accès ! Il sera impossible d'y accéder.
@@ -99,7 +101,7 @@ Pour des raisons de sécurité, nous devons vous voir au complet au check-in ava
 
 Toute l'équipe de coordination du camp se réjouit de vous retrouver pour cette journée d'accomplissement, après 3 ans de préparation.
 
-Nous vous remercions d'avance pour votre rigueur à propos des instructions pratiques indiquées plus haut.
+Nous vous remercions pour votre lecture.
 
 D'ici au 20, excellente continuation.
 
