@@ -34,8 +34,11 @@ class SendFinalInformations extends Command
         // Get all the registrations that have received a confirmation email that doesnt have recieved this mail
         $registrations = Registration::with(['ticket', 'participantRecuperation'])
             ->whereNotNull('payment_email_sent')
+            ->whereNull('logistic_information_sent')
             ->whereNull('cancelled_at')
-            //->whereRelation('ticket', 'transport_type', '=', TransportType::LocalResident)
+            //->whereHas('participantRecuperation')
+            //->whereDoesntHave('ticket')
+            //->whereRelation('ticket', 'transport_type', '=', TransportType::SpecialTrain)
             //->whereRelation('ticket', 'transport_location', '=', Location::Bienne)
             ->get()
             ->random(1);
