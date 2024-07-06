@@ -43,7 +43,8 @@ export default function TrainGraph({
     )
 
     let total = loads.bulleRossiniere + loads.montreuxRossiniere
-    let totalRetour = loadsRetour.bulleRossiniere + loads.montreuxRossiniere
+    let totalRetour = loadsRetour.bulleRossiniere + loadsRetour.montreuxRossiniere
+
     let grandTotal = total + totalByType.car + totalByType.autonomous + totalByType.local_resident
 
     const initialNodes = [
