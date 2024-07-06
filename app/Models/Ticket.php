@@ -15,7 +15,6 @@ class Ticket extends Model
     const JOURNEY_PRICE = 5;
     const TRANSPORT_PRICE = 20;
 
-
     public $fillable = [
         'transport_type',
         'transport_location',

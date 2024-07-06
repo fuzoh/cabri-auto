@@ -33,11 +33,13 @@ class Registration extends Model
         'comment',
         'form_filled_at',
         'payment_email_sent',
+        'logistic_information_sent',
     ];
 
     public $casts = [
         'form_filled_at' => 'datetime',
         'payment_email_sent' => 'datetime',
+        'logistic_information_sent' => 'datetime',
         'type' => RegistrationType::class,
     ];
 
