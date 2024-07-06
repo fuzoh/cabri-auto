@@ -17,16 +17,17 @@ class TrainWithParts extends Controller
         $totalReturnInTrain = $transports->map(function (Registration $r) {
             $partRecuperation = 0;
             if ($r->participantRecuperation) {
-                $partRecuperation = substr_count($r->participantRecuperation->names, "\n");
+                $partRecuperation = count(explode("\n", $r->participantRecuperation->names));
             }
 
             return [
                 'station' => $r->ticket->transport_location->name,
-                'total' => $r->ticket->totalPassengers() + $partRecuperation,
+                'total' => $r->ticket->totalPassengers(),
+                'part_recup' => $partRecuperation,
             ];
         })->groupBy('station')->map(function ($r) {
             return $r->reduce(function ($carry, $item) {
-                return $carry + $item['total'];
+                return $carry + $item['total'] + $item['part_recup'];
             }, 0);
         });
 
