@@ -38,8 +38,8 @@ class SendFinalInformations extends Command
             ->whereNull('cancelled_at')
             //->whereHas('participantRecuperation')
             //->whereDoesntHave('ticket')
-            //->whereRelation('ticket', 'transport_type', '=', TransportType::SpecialTrain)
-            //->whereRelation('ticket', 'transport_location', '=', Location::Bienne)
+            //->whereRelation('ticket', 'transport_type', '=', TransportType::LocalResident)
+            //->whereRelation('ticket', 'transport_location', '=', Location::Morges)
             ->get()
             ->random(1);
 

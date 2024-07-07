@@ -22,7 +22,7 @@ il vous faut juste votre inscription (en pièce jointe).
 Vous avez indiqué que vous partirez depuis la gare de **{{ $registration->ticket->transport_location }}**,
 vous pouvez **consulter l'horaire de train aller et retour en pièce jointe**.
 @if($registration->ticket->transport_location === \App\Models\Enums\Location::Bulle)
-Depuis Bulle, vous pouvez choisir parmi les 2 horaires allé et retour proposés en pièce jointe.
+Depuis Bulle, vous pouvez choisir parmi les 2 horaires aller et retour proposés en pièce jointe.
 @endif
 - Attention, si vous devez faire un bout de trajet en plus avant la gare de départ indiquée, pensez à le prévoir.
 - Attention, les trains spéciaux n'attendront pas les retardataires, veillez à prévoir de l'avance afin de ne pas les louper.
