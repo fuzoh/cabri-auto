@@ -27,7 +27,7 @@
 <h2>Nombre de personnes et accompagnants</h2>
 
 <p>Adultes: {{$registration->ticket->totalAdultPassengers()}}</p>
-<p>Enfants moins de 6 ans: {{$registration->ticket->baby_count }}</p>
+<p>Enfants moins de 6 ans: {{$registration->ticket->baby_count }}</p>
 
 <p><strong>Nom des accompagnants :</strong></p>
 <p>{{$registration->ticket->companion_names}}</p>

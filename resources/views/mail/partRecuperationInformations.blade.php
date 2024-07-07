@@ -1,7 +1,7 @@
 <x-mail::message>
 # Informations pratiques - Récupération de vos enfants le 20 juillet à Rossinière
 
-Bonjour, vous recevez cet e-mail, car vous vous êtes inscrits pour venir récupérer
+Bonjour, vous recevez cet e-mail, car vous êtes inscrits pour venir récupérer
 des participants au camp des 60 ans de la Brigade des Flambeaux le 20 juillet en fin de journée.
 
 Voici les informations pratiques :
@@ -20,7 +20,6 @@ De plus, vous n'aurez pas l'occasion de visiter le terrain de camp.
 Le numéro unique de votre inscription vous sera peut-être demandé : **{{ $registration->uuidPart() }}**
 
 Informations du preneur : **{{ $registration->email }} - {{ $registration->last_name }} {{ $registration->first_name }}**
-
 
 En nous réjouissant de vous voir le 20,
 

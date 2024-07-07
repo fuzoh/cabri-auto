@@ -56,7 +56,7 @@ class LogisticInformations extends Mailable
         if ($this->registration->ticket->transport_type === \App\Models\Enums\TransportType::SpecialTrain) {
             // Get right schedule
             $transport[1] = Attachment::fromStorage("horaires/{$this->registration->ticket->transport_location->value}.pdf")
-                ->as("Horaires train {$this->registration->ticket->transport_location->value} - Rossignère.pdf")
+                ->as("Horaires train {$this->registration->ticket->transport_location->value} - Rossinière.pdf")
                 ->withMime('application/pdf');
         }
 
