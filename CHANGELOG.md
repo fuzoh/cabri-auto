@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.7](https://github.com/fuzoh/cabri-auto/compare/v0.1.6...v0.1.7) (2024-07-08)
+
+
+### Features
+
+* display total for return ([b983ac1](https://github.com/fuzoh/cabri-auto/commit/b983ac111fb065969c7e697e243f4a7f6454117b))
+* emails with final information's ([1d1ff17](https://github.com/fuzoh/cabri-auto/commit/1d1ff17688d20563f4552d6a087047d9e43356b6))
+* first version of confirmation e-mail ([694cce1](https://github.com/fuzoh/cabri-auto/commit/694cce167750c14e1897ed8adcac5779027923a8))
+* payment reminder in confirmation ([ebb7555](https://github.com/fuzoh/cabri-auto/commit/ebb755559a971550ca140167b018ec0842707cf3))
+
+
+### Bug Fixes
+
+* email spelling ([a0fd556](https://github.com/fuzoh/cabri-auto/commit/a0fd55690fdf538433879f511f46cb54927c1e11))
+* part count with all lines ([622b38d](https://github.com/fuzoh/cabri-auto/commit/622b38d2e3ecb6a6b6141c855e3df59cf2344b19))
+* spelling on mails ([1ed4755](https://github.com/fuzoh/cabri-auto/commit/1ed475593a8340854ff5f47606849aa360e3c00b))
+* spelling on mails ([a973a1e](https://github.com/fuzoh/cabri-auto/commit/a973a1e0b6820cbc8f4e7fad32be568159e19615))
+* spelling on mails ([7818115](https://github.com/fuzoh/cabri-auto/commit/781811523f007cbfa435026cfb775ee9238db4cf))
+* total retour in train graph ([fb19402](https://github.com/fuzoh/cabri-auto/commit/fb194021b32ae0fa1d7888562ca5b0320b12d40f))
+
 ## [0.1.6](https://github.com/fuzoh/cabri-auto/compare/v0.1.5...v0.1.6) (2024-07-04)
 
 
