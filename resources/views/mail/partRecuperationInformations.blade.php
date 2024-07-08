@@ -1,4 +1,7 @@
 <x-mail::message>
+
+*Ceci est un email automatique, merci de ne pas répondre*
+
 # Informations pratiques - Récupération de vos enfants le 20 juillet à Rossinière
 
 Bonjour, vous recevez cet e-mail, car vous êtes inscrits pour venir récupérer
@@ -26,4 +29,6 @@ En nous réjouissant de vous voir le 20,
 Meilleures salutations.
 
 L'équipe de coordination du camp.
+
+*En cas de questions [coordination@cabri24.ch](mailto:coordination@cabri24.ch)*
 </x-mail::message>

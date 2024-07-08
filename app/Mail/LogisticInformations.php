@@ -52,7 +52,6 @@ class LogisticInformations extends Mailable
     public function attachments(): array
     {
         $transport = [];
-        // TODO: plan check in, inscription générée, horaires correspondant
         if ($this->registration->ticket->transport_type === \App\Models\Enums\TransportType::SpecialTrain) {
             // Get right schedule
             $transport[1] = Attachment::fromStorage("horaires/{$this->registration->ticket->transport_location->value}.pdf")

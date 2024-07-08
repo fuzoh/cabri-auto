@@ -1,4 +1,4 @@
-<h1>Inscription Journée Anniversaire des 60 ans de la brigade des Flambeaux</h1>
+<h1>Inscription Journée Anniversaire des 60 ans de la brigade des Flambeaux - 20 juillet 2024</h1>
 
 <p><i>Merci de vous munir de cette feuille d'inscription le jour même</i></p>
 
@@ -12,7 +12,7 @@
 
 <p><strong><i>Numéro unique : {{$registration->payment_id}}</i></strong></p>
 
-<hr style="margin-top: 10px; margin-bottom: 10px">
+<hr>
 
 <h2>Type d'inscription</h2>
 
@@ -22,12 +22,12 @@
     <p>Gare de départ : {{$registration->ticket->transport_location}}</p>
 @endif
 
-<hr style="margin-top: 10px; margin-bottom: 10px">
+<hr>
 
 <h2>Nombre de personnes et accompagnants</h2>
 
-<p>Adultes: {{$registration->ticket->totalAdultPassengers()}}</p>
-<p>Enfants moins de 6 ans: {{$registration->ticket->baby_count }}</p>
+<p>Adultes: <strong>{{$registration->ticket->totalAdultPassengers()}}</strong></p>
+<p>Enfants moins de 6 ans: <strong>{{$registration->ticket->baby_count }}</strong></p>
 
 <p><strong>Nom des accompagnants :</strong></p>
 <p>{{$registration->ticket->companion_names}}</p>

@@ -11,7 +11,8 @@ Nous vous en remercions. À ce jour nous n'avons pas encore reçu votre paiement
 - Si cela est dû à un oubli, nous vous remercions de bien vouloir effectuer le paiement dans de brefs délais.<br>
 - Si vous avez effectué le paiement hier ou aujourd'hui, vous pouvez ignorer ce message.<br>
 - Si vous avez bien fait le paiement, merci de bien vouloir nous envoyer une copie du justificatif de virement,
-afin que nous pussions retrouver le paiement correspondant dans notre système.
+afin que nous pussions retrouver le paiement correspondant dans notre système (notamment si vous avez payé au comptoir de la poste,
+car il nous est impossible de tracer ce type de paiement).
 
 Pour rappel, vous avez complété votre inscription le {{ $registration->form_filled_at->format('d.m.Y') }}, au nom de {{$registration->first_name }} {{ $registration->last_name }}, email : {{ $registration->email }}.<br>
 Vous avez reçu le mail de confirmation le {{ $registration->payment_email_sent->format('d.m.Y') }}.

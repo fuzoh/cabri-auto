@@ -1,4 +1,7 @@
 <x-mail::message>
+
+*Ceci est un email automatique, merci de ne pas répondre*
+
 # Informations pratiques - Journée anniversaire des 60 ans de la Brigade des Flambeaux - 20 juillet 2024
 
 Bonjour, vous recevez cet email car vous êtes inscrits à la journée
@@ -104,6 +107,19 @@ Pour des raisons de sécurité, nous devons vous voir au complet au check-in ava
 
 <hr>
 
+@if ($registration->payment_confirmation_id === null)
+
+## Paiement
+
+Si vous n'avez pas encore procédé au paiement, nous vous remercions de le faire
+encore avant la journée. Les paiements qui seront encaissés sur place seront majorés de 5.- CHF.
+En vous remerciant de votre compréhension. La facture pour le paiement se trouvent dans
+le premier mail de confirmation que vous avez reçu le {{ $registration->payment_email_sent->format('d.m.Y') }}.
+
+<hr>
+
+@endif
+
 Toute l'équipe de coordination du camp se réjouit de vous retrouver pour cette journée d'accomplissement, après 3 ans de préparation.
 
 Nous vous remercions pour votre lecture.
@@ -111,4 +127,6 @@ Nous vous remercions pour votre lecture.
 D'ici au 20, excellente continuation.
 
 L'équipe de coordination du camp.
+
+*En cas de questions [coordination@cabri24.ch](mailto:coordination@cabri24.ch)*
 </x-mail::message>

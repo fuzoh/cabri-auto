@@ -9,6 +9,7 @@ use App\Models\Enums\TransportType;
 use App\Models\Registration;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Sleep;
 
 class SendFinalInformations extends Command
 {
@@ -40,8 +41,8 @@ class SendFinalInformations extends Command
             //->whereDoesntHave('ticket')
             //->whereRelation('ticket', 'transport_type', '=', TransportType::LocalResident)
             //->whereRelation('ticket', 'transport_location', '=', Location::Morges)
-            ->get()
-            ->random(1);
+            ->get();
+            //->random(5);
 
         $bar = $this->output->createProgressBar(count($registrations));
         $bar->start();
@@ -50,19 +51,20 @@ class SendFinalInformations extends Command
             try {
                 if ($registration->participantRecuperation && ! $registration->ticket) {
                     // Only participant recuperation
-                    Mail::to('bastien.nicoud@flambeaux.ch')->send(new PartRecuperationInformations($registration));
+                    Mail::to($registration->email)->send(new PartRecuperationInformations($registration));
                 } else {
                     // Participation to all journey
-                    Mail::to('bastien.nicoud@flambeaux.ch')->send(new LogisticInformations($registration));
+                    Mail::to($registration->email)->send(new LogisticInformations($registration));
                 }
 
-                //$registration->logistic_information_sent = now();
-                //$registration->save();
+                $registration->logistic_information_sent = now();
+                $registration->save();
             } catch (\Exception $e) {
                 dump($registration);
                 dump($e);
             } finally {
                 $bar->advance();
+                Sleep::usleep(200000);
             }
         });
 
